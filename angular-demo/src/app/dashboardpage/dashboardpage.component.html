@@ -1,0 +1,217 @@
+<!-- <div *ngIf="!isProduct">
+<div class="row">
+  <ng-container *ngFor="let product of getProductsForCurrentPage() | paginate: { itemsPerPage: pageSize, currentPage: currentPage, totalItems: products.length }">
+    <div class="col-md-2 m-lg-4">
+      <a (click)="redirectToProductdetail(product)" style="text-decoration: none;">
+        <div class="card mb-3">
+
+          <div class="post-image">
+            <img class="img-fluid" [src]="'http://localhost:5000/uploads/' + product.image" >
+          </div>
+          <div class="card-body">
+            <h5 class="card-title">Name:{{ product.name }}</h5>
+            <p class="card-text">Description: {{ product.description }}</p>
+            <p class="card-text">Price: {{ product.price }}</p>
+          </div>
+        </div>
+      </a>
+    </div>
+  </ng-container>
+</div>
+<pagination-controls (pageChange)="currentPage = $event"></pagination-controls>
+</div>
+<app-productdetail *ngIf="isProduct" [productdetail]="productDetail"></app-productdetail>
+<button class="btn btn-dark ms-5" *ngIf="isProduct" (click)="back()">Back</button> -->
+<!-- <div *ngIf="!isProduct">
+  <div class="row">
+    <div class="col-md-2 m-lg-4" *ngFor="let product of products">
+      <a (click)="redirectToProductdetail(product)" style="text-decoration: none;">
+        <div class="card mb-3">
+          <div class="post-image">
+            <img class="img-fluid" [src]="'http://localhost:5000/uploads/' + product.image" >
+          </div>
+          <div class="card-body">
+            <h5 class="card-title">Name: {{ product.name }}</h5>
+            <p class="card-text">Description: {{ product.description }}</p>
+            <p class="card-text">Price: {{ product.price }}</p>
+          </div>
+        </div>
+      </a>
+    </div>
+  </div>
+</div>
+<app-productdetail *ngIf="isProduct" [productdetail]="productDetail"></app-productdetail>
+<button class="btn btn-dark ms-5"  *ngIf="isProduct" (click)="back()">Back</button>
+<div class="mt-3">
+  <ul class="pagination justify-content-center" style="cursor: pointer;">
+    <li class="page-item">
+      <a  class="page-link" (click)="goToPage(currentPage - 1)" aria-label="Previous">
+        Previous
+      </a>
+    </li>
+    <li class="page-item" *ngFor="let page of getPagesArray()">
+      <a class="page-link" (click)="goToPage(page)">{{ page }}</a>
+    </li>
+    <li class="page-item">
+      <a class="page-link" (click)="goToPage(currentPage + 1)" aria-label="Next">
+        Next
+      </a>
+    </li>
+  </ul>
+</div> -->
+
+
+
+<!-- <div class="col" *ngIf="isSearch" style="margin-left: 1633px;">
+  <div ngbDropdown class="d-inline-block">
+    <button type="button" class="btn btn-dark" id="dropdownBasic1" ngbDropdownToggle>
+      Sort by: Featured
+    </button>
+    <div ngbDropdownMenu aria-labelledby="dropdownBasic1">
+      <button ngbDropdownItem>Sort by: Low to High</button>
+      <button ngbDropdownItem>Sort by: High to Low</button>
+    </div>
+  </div>
+</div> -->
+<app-header (searchValue)="handleSearch($event)"></app-header>
+<div *ngIf="isSearch" >
+  <div class="col " style="margin-left: 1633px;">
+    <div ngbDropdown class="d-inline-block">
+      <button type="button" class="btn btn-dark" id="dropdownBasic1" ngbDropdownToggle>
+        Sort by: Featured
+      </button>
+      <div ngbDropdownMenu aria-labelledby="dropdownBasic1">
+        <button ngbDropdownItem (click)="sortProducts('lowToHigh')">Sort by: Low to High</button>
+        <button ngbDropdownItem (click)="sortProducts('highToLow')">Sort by: High to Low</button>
+        <button ngbDropdownItem (click)="sortProducts('featured')">Sort by: Featured</button>
+      </div>
+    </div>
+  </div>
+</div>
+
+<div *ngIf="!isProduct">
+  <div class="row" *ngIf="products.length > 0; ">
+    <div class="col-md-2 m-lg-4" *ngFor="let product of products">
+      <a (click)="redirectToProductdetail(product)" style="text-decoration: none;">
+        <div class="card mb-3">
+
+          <div class="post-image">
+            <img class="img-fluid" [src]="'http://localhost:5000/uploads/' + product.image" >
+          </div>
+          <div class="card-body">
+            <h5 class="card-title">Name: {{ product.name }}</h5>
+            <p class="card-text">Description: {{ product.description }}</p>
+            <p class="card-text">Price: {{ product.price }}</p>
+            <p class="card-text">Stock: {{ product.stock }}</p>
+          </div>
+        </div>
+      </a>
+    </div>
+  </div>
+  <button class="btn btn-dark ms-5" *ngIf="isSearch" (click)="home()">Go to home</button>
+
+   <!-- Show "No results found" message when products.length is 0 -->
+  <ng-template #noResults>
+    <div class="text-center mt-5">
+      <h3>No results found.</h3>
+    </div>
+  </ng-template>
+</div>
+<app-productdetail *ngIf="isProduct" [productdetail]="productDetail"></app-productdetail>
+<button class="btn btn-dark ms-5" *ngIf="isProduct" (click)="back()">Back</button>
+<div class="mt-3" *ngIf="!isProduct">
+  <ul class="pagination justify-content-center" style="cursor: pointer;">
+    <li class="page-item">
+      <a class="page-link" (click)="goToPage(currentPage - 1)" aria-label="Previous">
+        Previous
+      </a>
+    </li>
+    <li class="page-item" *ngFor="let page of getPagesArray()">
+      <a class="page-link" (click)="goToPage(page)">{{ page }}</a>
+    </li>
+    <li class="page-item">
+      <a class="page-link" (click)="goToPage(currentPage + 1)" aria-label="Next">
+        Next
+      </a>
+    </li>
+  </ul>
+</div>
+
+
+
+
+<!-- <pagination-controls (pageChange)="onPageChange($event)" [maxSize]="totalPages"></pagination-controls>
+<div class="mt-3">
+  <ul class="pagination justify-content-center">
+    <li class="page-item" [class.active]="currentPage === page" *ngFor="let page of getPagesArray()">
+      <a class="page-link" (click)="goToPage(page)">{{ page }}</a>
+    </li>
+  </ul>
+</div> -->
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<!-- <div class="row">
+  <ng-container *ngFor="let product of getProductsForCurrentPage() | paginate: { itemsPerPage: pageSize, currentPage: currentPage, totalItems: products.length }">
+    <div class="col-md-2 m-lg-4">
+      <div class="card mb-3">
+        <img [src]="product.image" class="card-img-top" alt="Product Image">
+        <div class="card-body">
+          <h5 class="card-title">{{ product.name }}</h5>
+          <p class="card-text">{{ product.description }}</p> -->
+          <!-- <p class="card-text">Brand: {{ product.brand }}</p> -->
+          <!-- <p class="card-text">Price: {{ product.price }}</p> -->
+          <!-- <p class="card-text">Category: {{ product.category }}</p> -->
+          <!-- <p class="card-text">Guarantee: {{ product.guarantee }}</p> -->
+          <!-- <button class="btn btn-warning" (click)="redirectToProductdetail(product)">Add to cart</button>
+        </div>
+      </div>
+    </div>
+  </ng-container>
+</div> -->
+
+
+<!-- -->

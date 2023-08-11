@@ -1,0 +1,31 @@
+<p>adminpage works!</p>
+<table>
+  <thead>
+    <tr>
+      <th>Name</th>
+      <th>Email</th>
+      <th>Status</th>
+      <th>Action</th>
+      <th>Action</th>
+
+      <!-- Add more columns as needed -->
+    </tr>
+  </thead>
+  <tbody>
+    <tr *ngFor="let user of registeredUsers">
+      <td>{{ user.name }}</td>
+      <td>{{ user.email }}</td>
+      <td>{{ user.status }}</td>
+      <td><button class="btn btn-danger" (click)="deleteUser(user)">Delete</button></td>
+      <td>
+        <button class="btn btn-secondary" (click)="redirectToEdit(user)">Edit</button>
+      </td>
+
+
+
+    </tr>
+
+  </tbody>
+</table>
+
+<!-- -->

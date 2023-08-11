@@ -1,0 +1,195 @@
+<!-- <h1>sadf</h1> -->
+<!-- <div *ngIf="cartData">
+  <h2>Cart Data</h2>
+  <ul>
+    <li *ngFor="let item of cartData[0]?.items">
+      <img class="img-fluid" [src]="'http://localhost:5000/uploads/' + item.productId.image" >
+
+      <p>Product Name: {{ item.productId.name }}</p>
+      <p>Price: {{ item.productId.price }}</p>
+      <p>Quantity: {{ item.quantity }}</p>
+      <p>Colour: {{ item.productId.colour }}</p>
+
+    </li>
+  </ul>
+</div> -->
+
+<app-header></app-header>
+<div *ngIf="cartData">
+  <h4 class="text-start mx-4 text-decoration-underline">Shopping Cart</h4>
+  <div class="row" *ngIf="cartData[0]?.items?.length > 0">
+    <div class="col-md-2 m-lg-4" *ngFor="let item of cartData[0]?.items">
+      <div class="card mb-3">
+        <div class="post-image">
+          <img
+            class="img-fluid"
+            [src]="'http://localhost:5000/uploads/' + item?.productId?.image"
+          />
+        </div>
+        <div class="card-body">
+          <h5 class="card-title">Product Name: {{ item?.productId?.name }}</h5>
+          <p class="card-text">
+            Price: {{ item.productId.price * item?.quantity }}
+          </p>
+
+          <!-- <label for="quantity">Quantity:</label>
+          <div *ngIf="!item.editQuantity">
+            <select
+              id="quantity"
+              [(ngModel)]="item.quantity"
+              (change)="onQuantityChange(item)"
+            >
+              <option *ngFor="let quantity of quantities" [value]="quantity">
+                {{ quantity === 5 ? '5+' : quantity }}
+              </option>
+            </select>
+          </div>
+          <div *ngIf="item.editQuantity">
+            <input
+              type="number"
+              class="form-control"
+              [(ngModel)]="item.quantity"
+            />
+            <button class="btn btn-primary" (click)="updateCartItem(item)">
+              Update
+            </button>
+          </div> -->
+
+          <label for="quantity">Quantity:</label>
+          <select
+            id="quantity"
+            [(ngModel)]="item.quantity"
+            (change)="updateCartItem(item)"
+          >
+            <option *ngFor="let quantity of quantities" [value]="quantity">
+              {{ quantity }}
+            </option>
+          </select>
+          <p>Colour: {{ item?.productId?.colour }}</p>
+          <p>Stock: {{ item?.productId?.stock }}</p>
+          <!-- <p>Colour: {{ item.id }}</p> -->
+          <button
+            class="btn btn-danger"
+            (click)="removeItemFromCart(item?.id)"
+          >
+            Delete
+          </button>
+          <div *ngIf="isUpdate">
+            <button class="btn btn-dark">Buy Now</button>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+<button class="btn btn-dark mx-4" (click)="goBack()">Back</button>
+
+<!-- <p class="card-text">Quantity: {{ item.quantity }}</p> -->
+<!-- Dropdown for Quantity -->
+<!-- <label for="quantity">Quantity:</label>
+          <select id="quantity" [(ngModel)]="item.quantity" (change)="quantityChanged(item)">
+            <option *ngFor="let quantity of quantities" [value]="quantity">{{ quantity }}</option>
+            <option [value]="-1">Other</option>
+          </select>
+
+          <div *ngIf="item.quantity === -1">
+            <label for="customQuantity">Custom Quantity:</label>
+            <input
+              type="number"
+              id="customQuantity"
+              [(ngModel)]="item.customQuantity"
+              (change)="quantityChanged(item)"
+              min="1"
+            />
+          </div> -->
+<!-- <button class="btn btn-danger" (click)="getItemsId(item.id)">Delete</button> -->
+
+<!-- <p>cartpage works!</p> -->
+<!-- <app-header></app-header> -->
+<!-- <ng-container *ngIf="cartdetail">
+  <div class="card mb-3" style="max-width: 540px; margin-left: 700px;">
+    <div class="row g-0">
+      <div class="col-md-4">
+        <img class="img-fluid" [src]="'http://localhost:5000/uploads/' + cartdetail.image" [alt]="cartdetail.name">
+      </div>
+      <div class="col-md-8">
+        <div class="card-body">
+          <h5 class="card-title">Name:{{ cartdetail?.name }}</h5>
+          <p class="card-text">Description:{{ cartdetail?.description }}</p>
+          <p class="card-text">Brand: {{ cartdetail?.brand }}</p>
+          <p class="card-text">Price: {{ cartdetail?.price }}</p>
+          <p class="card-text">Category: {{ cartdetail?.category }}</p>
+          <p class="card-text">Guarantee: {{ cartdetail?.guarantee }}</p>
+          <div class="col">
+            <div ngbDropdown class="d-inline-block" placement="bottom-right">
+              <button type="button" class="btn btn-dark" id="dropdownBasic1" ngbDropdownToggle>
+                Quantity:{{ selectedQuantity }}
+              </button>
+              <div ngbDropdownMenu aria-labelledby="dropdownBasic1">
+                <button ngbDropdownItem (click)="selectedQuantity = 1">1</button>
+                <button ngbDropdownItem (click)="selectedQuantity = 2">2</button>
+                <button ngbDropdownItem (click)="selectedQuantity = 3">3</button>
+                <button ngbDropdownItem (click)="selectedQuantity = 4">4</button>
+                <button ngbDropdownItem (click)="selectedQuantity = 5">5+</button>
+              </div>
+            </div>
+            <ng-container *ngIf="selectedQuantity >= 5">
+              <input type="number" [(ngModel)]="selectedQuantity" min="5" class="form-control mt-2" placeholder="Enter quantity">
+            </ng-container>
+            <ng-container *ngIf="selectedQuantity <= 0">
+              <input type="number" [(ngModel)]="selectedQuantity" class="form-control mt-2" placeholder="Enter quantity">
+            </ng-container>
+          </div>
+          <p class="card-text">Subtotal ({{ selectedQuantity }} item):{{cartdetail?.price * selectedQuantity}}</p>
+          <a class="btn btn-dark my-2" (click)="redirectToRegistration()">Place Order</a>
+        </div>
+      </div>
+    </div>
+  </div>
+</ng-container> -->
+
+<!-- <div class="card mb-3" style="max-width: 540px; margin-left: 700px;">
+  <div class="row g-0">
+    <div class="col-md-4">
+      <img class="img-fluid" [src]="'http://localhost:5000/uploads/' + cartdetail.image" [alt]="cartdetail.name">
+    </div>
+    <div class="col-md-8">
+      <div class="card-body">
+
+        <h5 class="card-title">Name:{{ cartdetail?.name }}</h5>
+        <p class="card-text">Description:{{ cartdetail?.description }}</p>
+        <p class="card-text">Brand: {{ cartdetail?.brand }}</p>
+        <p class="card-text">Price: {{ cartdetail?.price }}</p>
+        <p class="card-text">Category: {{ cartdetail?.category }}</p>
+        <p class="card-text">Guarantee: {{ cartdetail?.guarantee }}</p>
+        <div class="col">
+          <div ngbDropdown class="d-inline-block" placeme nt="bottom-right">
+            <button type="button" class="btn btn-dark" id="dropdownBasic1" ngbDropdownToggle>
+              Quantity:{{ selectedQuantity }}
+            </button>
+            <div ngbDropdownMenu aria-labelledby="dropdownBasic1">
+              <button ngbDropdownItem (click)="selectedQuantity = 1">1</button>
+              <button ngbDropdownItem (click)="selectedQuantity = 2">2</button>
+              <button ngbDropdownItem (click)="selectedQuantity = 3">3</button>
+              <button ngbDropdownItem (click)="selectedQuantity = 4">4</button>
+              <button ngbDropdownItem (click)="selectedQuantity = 5">5+</button>
+            </div>
+          </div>
+          <ng-container *ngIf="selectedQuantity >= 5">
+            <input type="number" [(ngModel)]="selectedQuantity" min="5" class="form-control mt-2" placeholder="Enter quantity">
+          </ng-container>
+            <ng-container *ngIf="selectedQuantity <= 0">
+            <input type="number" [(ngModel)]="selectedQuantity" class="form-control mt-2" placeholder="Enter quantity">
+          </ng-container>
+        </div>
+        <p class="card-text">Subtotal ({{ selectedQuantity }} item):{{cartdetail?.price * selectedQuantity}}</p>
+        <a class="btn btn-dark my-2" (click)="redirectToRegistration()">Place Order</a>
+      </div>
+    </div>
+  </div>
+</div> -->
+<!-- <button class="btn btn-dark ms-5">Back</button> -->
+<!-- <p>Selected Quantity: {{ selectedQuantity }}</p> -->
+<!-- <button class="btn btn-primary">Place Order</button> -->
+
+<!--  -->

@@ -1,0 +1,142 @@
+<!-- <header>
+  <div class="container">
+    <nav class="navbar navbar-light bg-light justify-content-end mt-5 mb-5">
+      <div class="d-flex">
+        <form class="d-flex justify-content-end">
+          <input class="form-control me-2" type="search" placeholder="Search" aria-label="Search" #searchInput>
+          <button (click)="submitSearch(searchInput.value)" class="btn btn-outline-success" type="submit">Search</button>
+
+        </form>
+        <a routerLink="registration" class="btn btn-warning ms-5">Sign Up!</a>
+        <a routerLink="cart" class="btn btn-dark ms-5">Cart</a>
+
+      </div>
+    </nav>
+   </div>
+</header> -->
+
+<header>
+  <div class="container">
+    <nav class="navbar navbar-light bg-light justify-content-end mt-5 mb-5">
+      <div class="d-flex">
+        <form class="d-flex justify-content-end">
+          <input class="form-control me-2" type="search" placeholder="Search" aria-label="Search" #searchInput>
+          <button (click)="handleSearchClick(searchInput.value)" class="btn btn-outline-dark" type="button">Search</button>
+        </form>
+        <a routerLink="registration" class="btn btn-warning ms-5">Sign in</a>
+        <a routerLink="cart" class="btn btn-dark ms-5">Cart:{{cartData?.[0]?.items.length}}</a>
+        <!-- <a routerLink="cart" class="btn btn-dark ms-5">Cart:{{cartData[0]?.items.length}}</a> -->
+        <!-- <h4>{{cartData[0]?.items.length}}</h4> -->
+
+      </div>
+    </nav>
+   </div>
+</header>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<!-- <header>
+  <div class="container">
+    <nav class="navbar navbar-light bg-light justify-content-end mt-5 mb-5">
+      <div class="d-flex">
+        <form class="d-flex justify-content-end">
+          <input class="form-control me-2" type="search" placeholder="Search" aria-label="Search" [(ngModel)]="searchQuery">
+          <button (click)="submitSearch()" class="btn btn-outline-success" type="submit">Search</button>
+        </form>
+        <a routerLink="registration" class="btn btn-warning ms-5">Sign Up!</a>
+        <a routerLink="cart" class="btn btn-dark ms-5">Cart</a>
+      </div>
+    </nav>
+  </div>
+</header> -->
+
+
+
+<!-- <header>
+
+  <div class="container">
+    <nav class="navbar navbar-light bg-light justify-content-end mt-5 mb-5">
+      <div class="d-flex">
+        <form class="d-flex justify-content-end" (ngSubmit)="searchProducts()">
+          <input class="form-control me-2" type="search" placeholder="Search" aria-label="Search" [(ngModel)]="searchTerm">
+
+          <button class="btn btn-outline-success" type="submit">Search</button>
+        </form>
+
+        <a routerLink="registration" class="btn btn-warning ms-5">Sign Up!</a>
+        <a routerLink="cart" class="btn btn-dark ms-5">Cart</a>
+      </div>
+    </nav>
+
+   </div>
+
+</header> -->
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<!-- <header>
+  <div class="container">
+    <nav class="navbar navbar-light bg-light justify-content-end mt-5 mb-5">
+      <div class="d-flex">
+        <form class="d-flex justify-content-end" (ngSubmit)="searchForm.submit()">
+          <input
+            class="form-control me-2"
+            type="search"
+            placeholder="Search"
+            aria-label="Search"
+            [(ngModel)]="searchTerm"
+            #searchForm="ngForm"
+          >
+          <button class="btn btn-outline-success" type="submit">Search</button>
+        </form>
+        <a routerLink="registration" class="btn btn-warning ms-5">Sign Up!</a>
+        <a routerLink="cart" class="btn btn-dark ms-5">Cart</a>
+      </div>
+    </nav>
+  </div>
+</header> -->

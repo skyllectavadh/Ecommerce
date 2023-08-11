@@ -1,0 +1,1393 @@
+<form #usersForm="ngForm" (ngSubmit)="getUserFormData(usersForm.value)">
+  <input type="text" ngModel name="name" placeholder="name" required #name="ngModel" />
+  <div *ngIf="name.invalid && (name.dirty || name.touched)" class="error-message">
+    Field is required
+  </div>
+  <br />
+
+  <input type="email" ngModel name="email" placeholder="email" required #email="ngModel" />
+  <div *ngIf="email.invalid && (email.dirty || email.touched)" class="error-message">
+    Field is required
+  </div>
+  <br />
+
+  <input type="text" ngModel name="mobile" placeholder="mobile" required #mobile="ngModel" />
+  <div *ngIf="mobile.invalid && (mobile.dirty || mobile.touched)" class="error-message">
+    Field is required
+  </div>
+  <br />
+
+  <input type="password" ngModel name="password" placeholder="password" required #password="ngModel" />
+  <div *ngIf="password.invalid && (password.dirty || password.touched)" class="error-message">
+    Field is required
+  </div>
+  <br />
+
+  <input type="password" ngModel name="confirmPassword" placeholder="confirmPassword" required #confirmPassword="ngModel" />
+  <div *ngIf="confirmPassword.invalid && (confirmPassword.dirty || confirmPassword.touched)" class="error-message">
+    Field is required
+  </div>
+  <br />
+
+  <button>Register Users</button>
+</form>
+Certainly! Let's break down the expression `*ngIf="name.invalid && (name.dirty || name.touched)"` step by step:
+
+1. `name.invalid`: This checks if the `name` input field is invalid. The `invalid` property is a boolean that is automatically set by Angular's form validation based on the input field's validity state. It will be `true` if the field is invalid and `false` otherwise.
+
+2. `name.dirty`: This checks if the `name` input field has been modified by the user. The `dirty` property is also a boolean set by Angular's form validation. It will be `true` if the field has been interacted with, meaning its value has been changed, and `false` if it remains untouched.
+
+3. `name.touched`: This checks if the `name` input field has been "touched" by the user. The `touched` property is another boolean provided by Angular's form validation. It will be `true` when the user focuses in and then focuses out of the input field, indicating that it has been interacted with.
+
+4. `(name.dirty || name.touched)`: This checks if either the `name` input field has been modified (`name.dirty` is `true`) or it has been touched (`name.touched` is `true`). This ensures that the error message is only displayed when the user has interacted with the field in some way.
+
+5. `*ngIf`: This is an Angular structural directive that conditionally adds or removes an element from the DOM based on the provided expression. In this case, the `<div>` element containing the error message will be added to the DOM if the expression `name.invalid && (name.dirty || name.touched)` evaluates to `true`.
+
+So, in summary, the `*ngIf` directive in `*ngIf="name.invalid && (name.dirty || name.touched)"` checks if the `name` input field is invalid and has been modified or touched by the user. If these conditions are met, the corresponding error message `<div>` will be displayed, informing the user that the field is required.
+
+You can apply similar logic and syntax for the other input fields in the form to display validation messages based on their validity, dirtiness, and touched states.
+
+
+<form #usersForm="ngForm" (ngSubmit)="getUserFormData(usersForm.value)">
+  <input
+    type="text"
+    ngModel
+    name="name"
+    placeholder="name"
+    required
+    #name="ngModel"
+  />
+  <div
+    *ngIf="name.invalid && (name.dirty || name.touched)"
+    class="error-message"
+  >
+    Field is required
+  </div>
+  <br />
+
+  <input
+    type="email"
+    ngModel
+    name="email"
+    placeholder="email"
+    required
+    email
+    #email="ngModel"
+  />
+  <div
+    *ngIf="email.invalid && (email.dirty || email.touched)"
+    class="error-message"
+  >
+    <div *ngIf="email.errors?.required">Field is required</div>
+    <div *ngIf="email.errors?.email">Invalid email format</div>
+  </div>
+  <br />
+
+  <input
+    type="text"
+    ngModel
+    name="mobile"
+    placeholder="mobile"
+    required
+    #mobile="ngModel"
+  />
+  <div
+    *ngIf="mobile.invalid && (mobile.dirty || mobile.touched)"
+    class="error-message"
+  >
+    Field is required
+  </div>
+  <br />
+
+  <input
+    type="password"
+    ngModel
+    name="password"
+    placeholder="password"
+    required
+    #password="ngModel"
+  />
+  <div
+    *ngIf="password.invalid && (password.dirty || password.touched)"
+    class="error-message"
+  >
+    Field is required
+  </div>
+  <br />
+
+  <input
+    type="password"
+    ngModel
+    name="confirmPassword"
+    placeholder="confirmPassword"
+    required
+    #confirmPassword="ngModel"
+  />
+  <div
+    *ngIf="
+      confirmPassword.invalid &&
+      (confirmPassword.dirty || confirmPassword.touched)
+    "
+    class="error-message"
+  >
+    Field is required
+  </div>
+  <br />
+
+  <button type="submit" [disabled]="usersForm.invalid">Submit</button>
+</form>
+
+
+<form #usersForm="ngForm" (ngSubmit)="getUserFormData(usersForm.value)">
+  <input
+    type="text"
+    ngModel
+    name="name"
+    placeholder="name"
+    required
+    #name="ngModel"
+  />
+  <div
+    *ngIf="name.invalid && (name.dirty || name.touched)"
+    class="error-message"
+  >
+    Field is required
+  </div>
+  <br />
+
+  <input
+    type="email"
+    ngModel
+    name="email"
+    placeholder="email"
+    required
+    email
+    #email="ngModel"
+  />
+  <div
+    *ngIf="email.invalid && (email.dirty || email.touched)"
+    class="error-message"
+  >
+    <div *ngIf="email.errors?.required">Field is required</div>
+    <div *ngIf="email.errors?.email">Invalid email format</div>
+  </div>
+  <br />
+
+  <input
+    type="text"
+    ngModel
+    name="mobile"
+    placeholder="mobile"
+    required
+    minlength="10"
+    maxlength="10"
+    pattern="[0-9]{10}"
+    #mobile="ngModel"
+  />
+  <div
+    *ngIf="mobile.invalid && (mobile.dirty || mobile.touched)"
+    class="error-message"
+  >
+    <div *ngIf="mobile.errors?.required">Field is required</div>
+    <div *ngIf="mobile.errors?.minlength">Mobile must have at least 10 digits</div>
+    <div *ngIf="mobile.errors?.maxlength">Mobile cannot have more than 10 digits</div>
+    <div *ngIf="mobile.errors?.pattern">Mobile must contain exactly 10 digits</div>
+  </div>
+  <br />
+
+  <input
+    type="password"
+    ngModel
+    name="password"
+    placeholder="password"
+    required
+    #password="ngModel"
+  />
+  <div
+    *ngIf="password.invalid && (password.dirty || password.touched)"
+    class="error-message"
+  >
+    Field is required
+  </div>
+  <br />
+
+  <input
+    type="password"
+    ngModel
+    name="confirmPassword"
+    placeholder="confirmPassword"
+    required
+    #confirmPassword="ngModel"
+  />
+  <div
+    *ngIf="
+      confirmPassword.invalid &&
+      (confirmPassword.dirty || confirmPassword.touched)
+    "
+    class="error-message"
+  >
+    Field is required
+  </div>
+  <br />
+
+  <button type="submit" [disabled]="usersForm.invalid">Submit</button>
+</form>
+
+
+<form #usersForm="ngForm" (ngSubmit)="getUserFormData(usersForm.value)">
+  <!-- Other form fields -->
+
+  <input
+    type="password"
+    ngModel
+    name="password"
+    placeholder="password"
+    required
+    minlength="6"
+    #password="ngModel"
+  />
+  <div
+    *ngIf="password.invalid && (password.dirty || password.touched)"
+    class="error-message"
+  >
+    <!-- Validation error messages -->
+  </div>
+  <br />
+
+  <input
+    type="password"
+    ngModel
+    name="confirmPassword"
+    placeholder="confirmPassword"
+    required
+    #confirmPassword="ngModel"
+  />
+  <div
+    *ngIf="
+      confirmPassword.invalid && (confirmPassword.dirty || confirmPassword.touched)
+    "
+    class="error-message"
+  >
+    <!-- Validation error messages -->
+  </div>
+  <br />
+
+  <div *ngIf="password.value !== confirmPassword.value && usersForm.dirty" class="error-message">
+    Passwords do not match
+  </div>
+  <br />
+
+  <button type="submit" [disabled]="usersForm.invalid || password.value !== confirmPassword.value">
+    Submit
+  </button>
+</form>
+
+
+this.userLoginData.saveLogin(data).subscribe((result) => {
+  console.log('Logged in successfully', result);
+  this.router.navigate(['/admin']); // Replace '/admin' with the actual route path for your admin component
+});
+
+
+Certainly! Here's a step-by-step explanation of the `deleteUser` method:
+
+1. `deleteUser(user: any)`: This is the method signature, indicating that the method receives a parameter `user` of type `any`. The `user` parameter represents the user object that needs to be deleted.
+
+2. `const index = this.registeredUsers.indexOf(user);`: This line finds the index of the `user` object in the `registeredUsers` array. The `indexOf` method searches for the first occurrence of the `user` object in the array and returns its index. If the `user` object is not found in the array, it returns -1.
+
+3. `if (index !== -1) {`: This condition checks if the `user` object was found in the array. If the `index` is not equal to -1, it means that the `user` object was found in the `registeredUsers` array.
+
+4. `this.registeredUsers.splice(index, 1);`: The `splice` method is used to modify the `registeredUsers` array. It takes two arguments: the `index` at which to start removing elements and the number of elements to remove. In this case, we want to remove only one element, so the second argument is 1. By calling `splice(index, 1)`, we remove the `user` object from the array.
+
+By executing these steps, the `deleteUser` method removes the specified `user` object from the `registeredUsers` array, effectively removing it from the table in the frontend. The changes made to the `registeredUsers` array are reflected in the HTML template, and the user is no longer displayed in the table.
+
+
+
+Certainly! Let's break down the `ngOnInit()` method step by step:
+
+1. `this.route.data.subscribe(data => { ... });` - This line subscribes to the `data` observable provided by the `ActivatedRoute`. The `data` observable emits the resolved data from the route.
+
+2. `const user = data?.state?.user;` - This line retrieves the `user` object from the resolved data. The `?.` operator is used for optional chaining, which ensures that if any of the intermediate properties (`state` or `user`) are undefined or null, the expression doesn't throw an error.
+
+3. `if (user) { ... }` - This conditional statement checks if the `user` object exists. If it does, it means that the resolved data contains user information.
+
+4. `this.name = user.name;` - This assigns the `name` property of the `user` object to the `name` property of the component. This assumes that the `name` property exists on both the `user` object and the component.
+
+5. Similarly, `this.email = user.email;` and `this.status = user.status;` assign the `email` and `status` properties of the `user` object to the respective properties of the component.
+
+By subscribing to the `data` observable and extracting the user information, this code ensures that if the resolved data contains a user object, the component's properties (`name`, `email`, and `status`) are updated with the respective values from the user object.
+
+Make sure that the resolved data from the route is correctly provided with the `state` object containing the `user` data. Also, ensure that the properties `name`, `email`, and `status` are declared in the component and have the appropriate types.
+
+Let me know if you have any further questions!
+
+Certainly! Let's break down the expression `data?.['state']?.user` step by step:
+
+1. `data?.['state']` - The `data` object is accessed using the optional chaining operator (`?.`). This ensures that if the `data` object is null or undefined, the subsequent property access (`['state']`) is not performed, and the result of the expression will be `undefined`.
+
+2. `?.user` - If the `data?.['state']` expression is not `undefined`, the `user` property is accessed using the optional chaining operator. This ensures that if the `user` property is null or undefined, the result of the expression will be `undefined`.
+
+Overall, the expression `data?.['state']?.user` allows for safe navigation through optional properties. It ensures that each property access is guarded against null or undefined values, preventing runtime errors if any intermediate property is missing.
+
+In the context of your code, this expression is used to access the `user` object within the resolved `data` object. It provides a safeguard against potential null or undefined values in the `data` object or its nested properties.
+
+Let me know if you need further clarification or have additional questions!
+
+['state']
+explain this..
+const data = {
+  state: {
+    user: {
+      name: 'John',
+      age: 25
+    }
+  }
+};
+
+const propertyName = 'state';
+console.log(data[propertyName].user); // { name: 'John', age: 25 }
+
+
+/////////////////////////////////////////////////////////
+Certainly! Let's break down the `getProducts()` method:
+
+```typescript
+getProducts(): Observable<any[]> {
+  return this.http.get<any[]>('http://localhost:5000/products');
+}
+```
+
+1. Method Signature:
+The method is called `getProducts` and it has a return type of `Observable<any[]>`. This means that it will return an observable that emits an array of any type.
+
+2. HTTP GET Request:
+Inside the method, there is a call to `this.http.get<any[]>`, which is the `HttpClient` service's `get()` method. This method is used to make an HTTP GET request to the specified URL.
+
+3. URL:
+The URL `'http://localhost:5000/products'` specifies the endpoint from which the data will be fetched. In this case, it points to the backend API endpoint that provides the product data.
+
+4. Response Type:
+The `<any[]>` part indicates the expected type of the response data. It specifies that the response will be an array of any type.
+
+5. Return Statement:
+The `return` statement returns the HTTP GET request as an observable. This allows the calling code to subscribe to the observable and receive the emitted data when the HTTP request is successful.
+
+In summary, the `getProducts()` method in the `ProductService` is responsible for making an HTTP GET request to the specified URL and returning an observable that emits an array of product data. This allows other components or services to subscribe to the observable and receive the product data when it becomes available.
+
+
+/////////////////
+/////////////////////
+export class DashboardComponent implements OnInit {
+  products: any[] = [];
+
+  // Set the number of products to display per page
+  pageSize = 10;
+
+  // Create a method to retrieve the products for the current page
+  getProductsForCurrentPage() {
+    const startIndex = (this.currentPage - 1) * this.pageSize;
+    const endIndex = startIndex + this.pageSize;
+    return this.products.slice(startIndex, endIndex);
+  }
+
+  // Assuming you have a property for the current page number
+  currentPage = 1;
+
+  constructor(private productService: ProductService) {}
+
+  ngOnInit() {
+    this.fetchProducts();
+  }
+
+  fetchProducts() {
+    this.productService.getProducts().subscribe(
+      (response) => {
+        this.products = response;
+        console.log('Product data', this.products);
+      },
+      (error) => {
+        console.error('Error fetching products', error);
+      }
+    );
+  }
+}
+
+
+/////
+////
+//
+Sure! Let's go through the code step by step:
+
+1. `export class DashboardComponent implements OnInit {`: This line defines the `DashboardComponent` class and indicates that it implements the `OnInit` lifecycle hook.
+
+2. `products: any[] = [];`: This declares an empty array `products` to store the fetched products.
+
+3. `pageSize = 10;`: This sets the number of products to display per page. In this case, it is set to 10.
+
+4. `getProductsForCurrentPage() { ... }`: This method calculates the range of products to display based on the current page number and page size. It uses the `slice()` method to extract a portion of the `products` array.
+
+5. `currentPage = 1;`: This initializes the `currentPage` property to 1, representing the initial page.
+
+6. `constructor(private productService: ProductService) { }`: This is the constructor of the `DashboardComponent` class. It injects the `ProductService` to fetch the products.
+
+7. `ngOnInit() { ... }`: This is the `ngOnInit` method from the `OnInit` lifecycle hook. It is called when the component is initialized. In this method, `fetchProducts()` is called to fetch the products.
+
+8. ` fetchProducts() { ... }`: This method uses the `productService` to fetch the products asynchronously. It subscribes to the `getProducts()` method's observable to receive the response. The fetched products are assigned to the `products` property, and any error that occurs during the API call is logged to the console.
+
+By implementing these steps, you ensure that the `products` array is populated with data from the API, and the `getProductsForCurrentPage()` method retrieves the appropriate products based on the current page and page size. This allows you to display the desired number of products per page and implement pagination in your template.
+
+
+////====
+Certainly! Let's break down the `getProductsForCurrentPage()` method line by line:
+
+```typescript
+const startIndex = (this.currentPage - 1) * this.pageSize;
+```
+- `startIndex` is a variable that calculates the index of the first product to include in the current page. It is determined by subtracting 1 from the `currentPage` property and then multiplying it by the `pageSize`. This formula calculates the starting index of the products for the current page.
+
+```typescript
+const endIndex = startIndex + this.pageSize;
+```
+- `endIndex` is a variable that calculates the index of the last product to include in the current page. It is determined by adding the `startIndex` to the `pageSize`. This formula calculates the ending index of the products for the current page.
+
+```typescript
+return this.products.slice(startIndex, endIndex);
+```
+- This line uses the `slice()` method on the `products` array to extract a portion of the array that corresponds to the products for the current page. The `slice()` method takes two arguments: the starting index and the ending index (exclusive). By providing `startIndex` and `endIndex`, we obtain a new array containing only the products that should be displayed on the current page.
+
+In summary, the `getProductsForCurrentPage()` method calculates the range of indices (`startIndex` and `endIndex`) based on the current page and page size. It then uses the `slice()` method to extract the relevant portion of the `products` array, returning a new array with the products to be displayed on the current page.
+
+
+
+/////
+////////////////
+/////////////////////
+
+Certainly! Let's break down the code for the `CartpageComponent` step by step:
+
+1. Class declaration:
+```typescript
+export class CartpageComponent implements OnInit {
+```
+In this code, we declare the `CartpageComponent` class and indicate that it implements the `OnInit` interface.
+
+2. Property declarations:
+```typescript
+productId!: string;
+product: any;
+```
+Here, we declare two properties for the `CartpageComponent` class: `productId` and `product`. The `productId` property is of type `string` and is marked with the TypeScript "!" non-null assertion operator to indicate that it will be initialized before being used. The `product` property is of type `any` and will hold the product data.
+
+3. Constructor:
+```typescript
+constructor(private route: ActivatedRoute) {}
+```
+The constructor is a special method that gets called when an instance of the `CartpageComponent` class is created. In this case, the constructor takes an instance of the `ActivatedRoute` service as a parameter, which will be used to access the route information.
+
+4. OnInit implementation:
+```typescript
+ngOnInit() {
+```
+The `ngOnInit` method is part of the `OnInit` interface and gets executed when the component is initialized. It is used to perform any initialization tasks for the component.
+
+5. Accessing the product ID from the route:
+```typescript
+this.productId = this.route.snapshot.params['id'];
+```
+Here, we use the `snapshot` property of the `ActivatedRoute` service to access the current route's snapshot, which contains the URL parameters. By accessing the `params` property and providing the parameter name `'id'`, we can retrieve the product ID from the URL.
+
+6. Logging the product ID to the console:
+```typescript
+console.log("productId", this.productId);
+```
+This line logs the value of the `productId` property to the console. It is useful for debugging purposes to verify that the product ID is correctly retrieved from the URL.
+
+7. Retrieving the product object from the navigation state:
+```typescript
+this.product = history.state.product;
+```
+Here, we use the `history.state` property to retrieve the navigation state object. It is assumed that the product object is passed as part of the state during navigation from the dashboard component. The `product` property is then assigned the value of the product object.
+
+8. Logging the product object to the console:
+```typescript
+console.log("product", this.product);
+```
+This line logs the value of the `product` property to the console. It is useful for debugging purposes to verify that the product object is correctly retrieved from the navigation state.
+
+By following these steps, the `CartpageComponent` retrieves the product ID from the URL and the corresponding product object from the navigation state. These values can be used in the component's logic and template to display the relevant information about the product.
+
+I hope this explanation helps! Let me know if you have any further questions.
+
+
+//
+/
+/
+/
+Certainly! Let's dive deeper into the line `this.product = history.state.product;` in the `CartpageComponent`:
+
+1. `history.state`: The `history` object represents the browser's history stack, which keeps track of the pages visited by the user. The `state` property of the `history` object allows you to access the state object associated with the current page.
+
+2. `product`: In this case, `product` refers to a property within the state object. It is assumed that the product data was passed from the dashboard component to the cart page using the Angular router's navigation extras, specifically the `state` property.
+
+3. `this.product = history.state.product;`: This line of code assigns the value of the `product` property from the navigation state to the `product` property of the `CartpageComponent` class. It is equivalent to saying "set the `product` property of this component to the `product` property from the navigation state."
+
+In summary, the `history.state.product` code retrieves the product object that was passed as part of the state during navigation from the dashboard component to the cart page. It assumes that the product object is set in the `state` property when navigating to the cart page using the Angular router.
+
+Make sure that when navigating from the dashboard component, you pass the product object in the `state` property of the navigation extras. For example:
+
+```typescript
+redirectToCart(product: any) {
+  this.router.navigate(['/cart', product._id], { state: { product: product } });
+}
+```
+
+By doing this, the `product` property will be set in the state object and can be accessed in the cart page using `history.state.product`.
+
+I hope this explanation clarifies the usage of `history.state.product` in the code. Let me know if you have any further questions!
+
+
+
+///
+/
+<div class="row">
+  <ng-container *ngFor="let product of getProductsForCurrentPage() | paginate: { itemsPerPage: pageSize, currentPage: currentPage, totalItems: products.length }">
+    <div class="col-md-2 m-lg-4">
+      <a [routerLink]="['/product', product.id]">
+        <div class="card mb-3">
+          <img [src]="product.image" class="card-img-top" alt="Product Image">
+          <div class="card-body">
+            <h5 class="card-title">{{ product.name }}</h5>
+            <p class="card-text">{{ product.description }}</p>
+            <!-- <p class="card-text">Brand: {{ product.brand }}</p> -->
+            <p class="card-text">Price: {{ product.price }}</p>
+            <!-- <p class="card-text">Category: {{ product.category }}</p> -->
+            <!-- <p class="card-text">Guarantee: {{ product.guarantee }}</p> -->
+            <button class="btn btn-warning" (click)="redirectToCart(product)">Add to cart</button>
+          </div>
+        </div>
+      </a>
+    </div>
+  </ng-container>
+</div>
+
+
+
+<div class="card mb-3" style="max-width: 540px;">
+  <div class="row g-0">
+    <div class="col-md-4">
+      <img [src]="product.image" class="img-fluid rounded-start" alt="Product Image">
+    </div>
+    <div class="col-md-8">
+      <div class="card-body">
+        <h5 class="card-title">Name: {{ product.name }}</h5>
+        <p class="card-text">Description: {{ product.description }}</p>
+        <p class="card-text">Brand: {{ product.brand }}</p>
+        <p class="card-text">Price: {{ product.price }}</p>
+        <p class="card-text">Category: {{ product.category }}</p>
+        <p class="card-text">Guarantee: {{ product.guarantee }}</p>
+        <a [routerLink]="['/cart']" class="btn btn-warning">Add to Cart</a>
+        <button class="btn btn-dark mx-4">Buy Now</button>
+
+        <!-- <p class="card-text"><small class="text-muted">Last updated 3 mins ago</small></p> -->
+      </div>
+    </div>
+  </div>
+</div>
+
+
+///
+//
+<form #loginForm="ngForm" (ngSubmit)="getLoginFormData(loginForm.value)">
+  <input
+    type="email"
+    ngModel
+    name="email"
+    placeholder="email"
+    required
+    email
+    #email="ngModel"
+  />
+  <div
+    *ngIf="email.invalid && (email.dirty || email.touched)"
+    class="error-message"
+  >
+    <div *ngIf="email.errors?.required">Field is required</div>
+    <div *ngIf="email.errors?.email">Invalid email format</div>
+  </div>
+
+  <br />
+  <input
+    type="password"
+    ngModel
+    name="password"
+    placeholder="password"
+    required
+    minlength="6"
+    #password="ngModel"
+  />
+  <div
+    *ngIf="password.invalid && (password.dirty || password.touched)"
+    class="error-message"
+  >
+    <div *ngIf="password.errors?.required">Field is required</div>
+    <!-- Validation error messages -->
+  </div>
+  <br />
+  <button
+    class="btn btn-primary"
+    type="submit"
+    [disabled]="loginForm.invalid"
+  >
+    Login
+  </button>
+</form>
+
+
+
+////main------------------------------------------------------------------------------
+To send data from the parent component to the child component using `@Input()` and `@Output()` decorators, you can make the following changes:
+
+1. In your `dashboardpage.component.html` file, remove the `(click)` event and `[routerLink]` attribute from the `<a>` tag surrounding the product card. We will replace it with an event emitter.
+
+```html
+<div class="col-md-2 m-lg-4">
+  <app-product-card [product]="product" (viewProduct)="redirectToProductdetail($event)"></app-product-card>
+</div>
+```
+
+2. Create a new component called `ProductCardComponent` using the Angular CLI command:
+
+```bash
+ng generate component product-card
+```
+
+3. In the `product-card.component.ts` file, define an `@Input()` property to receive the `product` data from the parent component:
+
+```typescript
+import { Component, Input, Output, EventEmitter } from '@angular/core';
+
+@Component({
+  selector: 'app-product-card',
+  templateUrl: './product-card.component.html',
+  styleUrls: ['./product-card.component.css']
+})
+export class ProductCardComponent {
+  @Input() product: any;
+  @Output() viewProduct = new EventEmitter<any>();
+
+  onViewProduct() {
+    this.viewProduct.emit(this.product);
+  }
+}
+```
+
+4. Update the `product-card.component.html` file to use the `product` data and emit the `viewProduct` event:
+
+```html
+<div class="card mb-3">
+  <img [src]="product.image" class="card-img-top" alt="Product Image">
+  <div class="card-body">
+    <h5 class="card-title">{{ product.name }}</h5>
+    <p class="card-text">{{ product.description }}</p>
+    <p class="card-text">Price: {{ product.price }}</p>
+    <!-- Add a button to trigger the viewProduct event -->
+    <button class="btn btn-primary" (click)="onViewProduct()">View Product</button>
+  </div>
+</div>
+```
+
+5. In the `dashboardpage.component.ts` file, remove the `redirectToProductdetail` function.
+
+6. In the `dashboardpage.component.html` file, update the `ng-container` to use the `ProductCardComponent`:
+
+```html
+<ng-container *ngFor="let product of getProductsForCurrentPage() | paginate: { itemsPerPage: pageSize, currentPage: currentPage, totalItems: products.length }">
+  <div class="col-md-2 m-lg-4">
+    <app-product-card [product]="product" (viewProduct)="redirectToProductdetail($event)"></app-product-card>
+  </div>
+</ng-container>
+```
+
+7. Finally, in the `dashboardpage.component.ts` file, define a new `redirectToProductdetail` function to navigate to the product detail page:
+
+```typescript
+redirectToProductdetail(product: any) {
+  this.router.navigate(['/productdetail', product._id]);
+}
+```
+
+With these changes, you are using the `ProductCardComponent` as a reusable component to display the product card. When the "View Product" button is clicked, the `viewProduct` event is emitted with the selected product, which is then passed to the `redirectToProductdetail` function to navigate to the product detail page.
+
+
+<div class="row">
+  <ng-container *ngFor="let product of getProductsForCurrentPage() | paginate: { itemsPerPage: pageSize, currentPage: currentPage, totalItems: products.length }">
+    <div class="col-md-2 m-lg-4">
+      <app-productdetail [product]="product"></app-productdetail>
+    </div>
+
+  </ng-container>
+</div>
+< this is my dashboardpage.component.html file how can i pass header of this file to productdetail.component.html file pagination-controls (pageChange)="currentPage = $event"></>
+how can i add productdetail datas into local storage on clicking add to cart button
+
+
+
+/
+/
+/
+/
+/////////////////////////////////////////////////////////////
+To access the response data from `searchProducts$` in the `dashboardpage.component.ts` file, you can use a shared service or an event emitter to communicate between the `HeaderComponent` and `DashboardPageComponent`. Here's an example using a shared service:
+
+1. Create a shared service to share the data between components:
+```typescript
+// shared-data.service.ts
+import { Injectable } from '@angular/core';
+import { BehaviorSubject, Observable } from 'rxjs';
+
+@Injectable({
+  providedIn: 'root',
+})
+export class SharedDataService {
+  private searchDataSubject: BehaviorSubject<any> = new BehaviorSubject<any>(null);
+
+  setSearchData(data: any) {
+    this.searchDataSubject.next(data);
+  }
+
+  getSearchData(): Observable<any> {
+    return this.searchDataSubject.asObservable();
+  }
+}
+```
+
+2. Inject the `SharedDataService` into both `HeaderComponent` and `DashboardPageComponent`:
+```typescript
+// header.component.ts
+import { Component } from '@angular/core';
+import { ProductService } from '../services/product.service';
+import { SharedDataService } from '../services/shared-data.service';
+
+@Component({
+  selector: 'app-header',
+  templateUrl: './header.component.html',
+  styleUrls: ['./header.component.css'],
+})
+export class HeaderComponent {
+  constructor(
+    private productService: ProductService,
+    private sharedDataService: SharedDataService
+  ) {}
+
+  submitSearch(val: string) {
+    console.log("val", val);
+    this.productService.getProducts(1, val).subscribe(response => {
+      this.sharedDataService.setSearchData(response);
+      console.log("res", response);
+    });
+  }
+}
+```
+
+3. Access the response in `DashboardPageComponent` using the `SharedDataService`:
+```typescript
+// dashboardpage.component.ts
+import { Component, OnInit } from '@angular/core';
+import { SharedDataService } from '../services/shared-data.service';
+
+@Component({
+  selector: 'app-dashboardpage',
+  templateUrl: './dashboardpage.component.html',
+  styleUrls: ['./dashboardpage.component.css'],
+})
+export class DashboardPageComponent implements OnInit {
+  searchProducts: any;
+
+  constructor(private sharedDataService: SharedDataService) {}
+
+  ngOnInit() {
+    this.sharedDataService.getSearchData().subscribe(response => {
+      this.searchProducts = response;
+      // Use the searchProducts data in the DashboardPageComponent as needed
+      console.log("searchProducts", this.searchProducts);
+    });
+  }
+}
+```
+
+By using the `SharedDataService`, you can share the `searchProducts` data between the `HeaderComponent` and `DashboardPageComponent`. The `submitSearch` method in `HeaderComponent` sets the data in the service, and the `DashboardPageComponent` subscribes to the data changes and retrieves the response in the `ngOnInit` method.
+
+/
+/
+/
+The `SharedDataService` is a service in Angular that provides a way to share data between components. It uses a `BehaviorSubject` from the RxJS library to store and emit the data.
+
+Here's an explanation of the different parts of the `SharedDataService`:
+
+- `searchDataSubject: BehaviorSubject<any>`: This is a private `BehaviorSubject` instance that holds the data. It is initialized with `null` as the initial value.
+
+- `setSearchData(data: any)`: This method allows you to set the data in the `searchDataSubject`. It takes the `data` parameter and uses the `next()` method of the `BehaviorSubject` to emit the new value to any subscribers.
+
+- `getSearchData(): Observable<any>`: This method returns an `Observable` that allows components to subscribe and receive updates whenever the data in `searchDataSubject` changes. It uses the `asObservable()` method of the `BehaviorSubject` to expose only the observable part of the subject, preventing direct modification of the subject from outside the service.
+
+With this service in place, you can set the search data using `setSearchData()` and retrieve it in other components by subscribing to `getSearchData()`. This provides a centralized way to share and communicate data between components in your Angular application.
+
+??/////
+/
+/
+/
+/
+/
+Sure, let's explain the `ngOnInit()` method in the `DashboardComponent`:
+
+1. **this.searchService.getSearchProducts().subscribe(...)**:
+   - The `this.searchService.getSearchProducts()` method is called to get the observable representing the search products from the `SearchService`.
+   - The `.subscribe()` method is then chained to the observable to subscribe to any updates emitted by the observable.
+   - When the `SearchService` updates its `searchProductsSubject` with new data (i.e., when `setSearchProducts` is called with new products), the `DashboardComponent` will receive those updates through this subscription.
+
+2. **(response: any) => {...}**:
+   - This is an anonymous function (arrow function) that is passed as an argument to the `.subscribe()` method.
+   - The function takes an argument `response`, which will be the data emitted by the observable when it receives an update.
+   - In this case, the `response` object is expected to have properties like `products`, `currentPage`, and `totalPages`.
+
+3. **this.products = response.products || []**:
+   - In this line, the `products` property of the `DashboardComponent` is updated with the value of `response.products`.
+   - If `response.products` is null or undefined (i.e., there are no search results or an error occurred), `this.products` will be set to an empty array ([]).
+   - This ensures that `this.products` is always an array, even if there are no search results or an error occurred.
+
+4. **this.currentPage = response.currentPage || 1**:
+   - This line updates the `currentPage` property of the `DashboardComponent` with the value of `response.currentPage`.
+   - If `response.currentPage` is null or undefined (e.g., in case of an error), `this.currentPage` will be set to 1 as a default value.
+
+5. **this.totalPages = response.totalPages || 0**:
+   - This line updates the `totalPages` property of the `DashboardComponent` with the value of `response.totalPages`.
+   - If `response.totalPages` is null or undefined (e.g., in case of an error or when there are no search results), `this.totalPages` will be set to 0 as a default value.
+
+6. **this.fetchProducts()**:
+   - After subscribing to the `searchProducts` observable, the `this.fetchProducts()` method is called to initially load the products.
+   - This method will fetch the initial set of products to be displayed on the dashboard.
+
+In summary, the `ngOnInit()` method sets up a subscription to the `searchProducts` observable from the `SearchService`. Whenever there are updates to the search products (when `setSearchProducts()` is called in the `HeaderComponent`), the `DashboardComponent` will receive those updates and update its `products`, `currentPage`, and `totalPages` accordingly. Additionally, it fetches the initial set of products when the component is first initialized using the `this.fetchProducts()` method.
+
+
+
+
+ fetchProducts() { onclicking add to cart button redirect to cart page component and show data on cart page component
+    if (this.isSearch) {
+      // Sort the existing products array based on the selected sorting option
+      if (this.sortOrder === 'desc') {
+        // Sort in descending order (high to low)
+        this.products.sort((a, b) => b.price - a.price);
+      } else {
+        // Sort in ascending order (low to high)
+        this.products.sort((a, b) => a.price - b.price);
+      }
+    } else {
+      // Fetch all products using the ProductService if no search has been performed
+      this.productService.getProducts(this.currentPage).subscribe(
+        (response: any) => {
+          this.products = response.products || [];
+          this.currentPage = response.currentPage || 1;
+          this.totalPages = response.totalPages || 0;
+        },
+        (error) => {
+          console.error('Error fetching products', error);onclicking
+        }
+      );
+    }
+  }
+
+  // Add the sortProducts function to handle sorting
+  sortProducts(order: string) {
+    // Update the sortField and sortOrder based on the selected sorting option
+    this.sortField = 'price'; // Change this to the appropriate field you want to sort by (e.g., 'price')
+    this.sortOrder = order === 'highToLow' ? 'desc' : 'asc';
+
+    // Sort the products array based on the selected sorting option
+    this.fetchProducts(); In this code i only get sorting dropdown when i perform search and when and i get dropdown when i get search response so when I click on any sorting low to high or high to low it sort my sort my all product i want to sort only my search response data
+  }
+
+/
+/
+/
+/
+/
+The if (this.isSearch) condition checks whether the current data being displayed is a search result or not. If isSearch is true, it means the data is a search response, and sorting is applicable.
+
+Inside the if (this.isSearch) block, we have another if-else block. This block checks the value of this.sortOrder, which represents the sorting order. If this.sortOrder is equal to 'desc', it means we want to sort the products in descending order (high to low). Otherwise, if this.sortOrder is not 'desc', it means we want to sort the products in ascending order (low to high).
+
+If this.sortOrder is 'desc', we sort the products array in descending order using the sort method. The sort method takes a comparison function as an argument, which compares two elements (a and b) of the array and returns a positive number if b should come before a, a negative number if a should come before b, and 0 if they are equal. In this case, we are sorting by the price field in descending order, so b.price - a.price ensures that products with higher prices will come before products with lower prices.
+
+If this.sortOrder is not 'desc', i.e., it's 'asc' or an empty string, we sort the products array in ascending order (low to high) using the sort method. The comparison function a.price - b.price ensures that products with lower prices will come before products with higher prices.
+
+After sorting, the sorted products array is assigned back to this.products, and the UI will reflect the updated sorting.
+
+By applying this code inside the if (this.isSearch) block, we ensure that sorting is only applied to the search response data and not to the initial data (when isSearch is false). This way, sorting will work as expected for both the initial data and the search response data
+
+/
+/
+/
+/
+
+-this is my /home/dev/Desktop/angular-demo/demo/src/app/productdetail/productdetail.component.html file
+<div *ngIf="!isCart">
+  <div class="card mb-3" style="max-width: 700px; margin-left: 700px">
+    <div class="row g-0">
+      <div class="col-md-4 ">
+        <img class="img-fluid" [src]="'http://localhost:5000/uploads/' + productdetail.image" [alt]="productdetail.name">
+      </div>
+
+      <div class="col-md-8 ">
+        <div class="card-body">
+          <h5 class="card-title">Name:{{ productdetail?.name }}</h5>
+          <p class="card-text">Description:{{ productdetail?.description }}</p>
+          <p class="card-text">Brand: {{ productdetail?.brand }}</p>
+          <p class="card-text">Price: {{ productdetail?.price }}</p>
+          <p class="card-text">Category: {{ productdetail?.category }}</p>
+          <p class="card-text">Guarantee: {{ productdetail?.guarantee }}</p>
+          <div class="col">
+            <div ngbDropdown class="d-inline-block" placement="bottom-right">
+              <button type="button" class="btn btn-dark" id="dropdownBasic1" ngbDropdownToggle>
+                Quantity:{{ selectedQuantity }}
+              </button>
+              <div ngbDropdownMenu aria-labelledby="dropdownBasic1">
+                <button ngbDropdownItem (click)="selectedQuantity = 1">1</button>
+                <button ngbDropdownItem (click)="selectedQuantity = 2">2</button>
+                <button ngbDropdownItem (click)="selectedQuantity = 3">3</button>
+                <button ngbDropdownItem (click)="selectedQuantity = 4">4</button>
+                <button ngbDropdownItem (click)="selectedQuantity = 5">5</button>
+              </div>
+            </div>
+          </div>
+          <a (click)="sendToCart(productdetail)" class="btn btn-warning my-2"
+            >Add to Cart</a
+          >
+          <button class="btn btn-dark mx-4">Buy Now</button>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+<app-cartpage *ngIf="isCart" [cartdetail]="cartDetail" [selectedQuantity]="selectedQuantity" ></app-cartpage>
+
+-this is my /home/dev/Desktop/angular-demo/demo/src/app/productdetail/productdetail.component.ts file
+
+import { Component, OnInit ,Input } from '@angular/core';
+
+
+@Component({
+  selector: 'app-productdetail',
+  templateUrl: './productdetail.component.html',
+  styleUrls: ['./productdetail.component.css']
+})
+export class ProductdetailComponent implements OnInit{
+
+  @Input() productdetail: any = {};
+
+  selectedQuantity: number = 1;
+
+  cartDetail: any[] = [];
+  isCart: boolean = false;
+  constructor() {
+
+  }
+
+  ngOnInit() {
+    // this.productId = this.route.snapshot.params['id'];
+    console.log('productdetail', this.productdetail);
+    // console.log("productId", this.productId);
+
+    // this.product = history.state.product;
+    // console.log("product", this.product);
+  }
+
+  sendToCart(productdetail:any){
+    this.cartDetail = productdetail
+    this.isCart = true
+    const cartItemJSON = localStorage.getItem('cartItem');
+    // console.log("zzz",cartItemJSON);
+    // console.log("l",localStorage);
+
+    const cartItem = cartItemJSON ? JSON.parse(cartItemJSON) : [];
+    // console.log("ci",cartItem);
+
+
+    // Add the productdetail to the cart items array
+    cartItem.push(productdetail);
+
+    // Save the updated cart items to local storage
+    localStorage.setItem('cartItem', JSON.stringify(cartItem));
+  }
+}
+
+-this is my /home/dev/Desktop/angular-demo/demo/src/app/cartpage/cartpage.component.html file
+
+<ng-container *ngIf="cartdetail">
+  <div class="card mb-3" style="max-width: 540px; margin-left: 700px;">
+    <div class="row g-0">
+      <div class="col-md-4">
+        <img class="img-fluid" [src]="'http://localhost:5000/uploads/' + cartdetail.image" [alt]="cartdetail.name">
+      </div>
+      <div class="col-md-8">
+        <div class="card-body">
+          <h5 class="card-title">Name:{{ cartdetail?.name }}</h5>
+          <p class="card-text">Description:{{ cartdetail?.description }}</p>
+          <p class="card-text">Brand: {{ cartdetail?.brand }}</p>
+          <p class="card-text">Price: {{ cartdetail?.price }}</p>
+          <p class="card-text">Category: {{ cartdetail?.category }}</p>
+          <p class="card-text">Guarantee: {{ cartdetail?.guarantee }}</p>
+          <div class="col">
+            <div ngbDropdown class="d-inline-block" placement="bottom-right">
+              <button type="button" class="btn btn-dark" id="dropdownBasic1" ngbDropdownToggle>
+                Quantity:{{ selectedQuantity }}
+              </button>
+              <div ngbDropdownMenu aria-labelledby="dropdownBasic1">
+                <button ngbDropdownItem (click)="selectedQuantity = 1">1</button>
+                <button ngbDropdownItem (click)="selectedQuantity = 2">2</button>
+                <button ngbDropdownItem (click)="selectedQuantity = 3">3</button>
+                <button ngbDropdownItem (click)="selectedQuantity = 4">4</button>
+                <button ngbDropdownItem (click)="selectedQuantity = 5">5+</button>
+              </div>
+            </div>
+            <ng-container *ngIf="selectedQuantity >= 5">
+              <input type="number" [(ngModel)]="selectedQuantity" min="5" class="form-control mt-2" placeholder="Enter quantity">
+            </ng-container>
+            <ng-container *ngIf="selectedQuantity <= 0">
+              <input type="number" [(ngModel)]="selectedQuantity" class="form-control mt-2" placeholder="Enter quantity">
+            </ng-container>
+          </div>
+          <p class="card-text">Subtotal ({{ selectedQuantity }} item):{{cartdetail?.price * selectedQuantity}}</p>
+          <a class="btn btn-dark my-2" (click)="redirectToRegistration()">Place Order</a>
+        </div>
+      </div>
+    </div>
+  </div>
+</ng-container>
+
+-this is my /home/dev/Desktop/angular-demo/demo/src/app/cartpage/cartpage.component.ts file
+
+import { Component, Input } from '@angular/core';
+import { Router } from '@angular/router';
+
+
+@Component({
+  selector: 'app-cartpage',
+  templateUrl: './cartpage.component.html',
+  styleUrls: ['./cartpage.component.css']
+})
+export class CartpageComponent  {
+  @Input() cartdetail: any = {};
+  @Input() selectedQuantity: number = 1;
+constructor(private router: Router) {
+
+  }
+
+    redirectToRegistration(): void {
+    const token = localStorage.getItem('token'); // Assuming the token is stored in localStorage
+
+    if (token) {
+      console.log('Token found:', token);
+      this.router.navigate(['/buypage']);
+      // Perform any other actions if the token is present
+    } else {
+      console.log('Token not found. Redirecting to registration page...');
+      this.router.navigate(['/registration']); // Replace '/registration' with the actual route path of your registration page
+    }
+  }
+  ngOnInit() {
+    // console.log("cartdetail",this.cartdetail);
+
+  }
+}
+
+/
+
+//
+/
+/
+To achieve this, you'll need to access the bearer token from the request header, decode it to extract the user ID, and then pass that user ID to the `addToCart` method in the `ProductdetailComponent`. Here's how you can do that:
+
+1. Extract User ID from Bearer Token in CartService:
+Modify the `CartService` to extract the user ID from the bearer token in the request header. You can achieve this by using the `localStorage` to store the bearer token after a user logs in successfully.
+
+Assuming you store the bearer token in `localStorage` with the key `'accessToken'`, you can create a method in `CartService` like this:
+
+```typescript
+@Injectable({
+  providedIn: 'root'
+})
+export class CartService {
+  constructor(private http: HttpClient) {}
+
+  private getUserIdFromToken(): string | null {
+    const token = localStorage.getItem('accessToken');
+    if (token) {
+      try {
+        // Assuming the token is a JWT and the user ID is stored in the 'sub' claim.
+        const decodedToken = JSON.parse(atob(token.split('.')[1]));
+        return decodedToken.sub;
+      } catch (error) {
+        console.error('Error decoding token:', error);
+      }
+    }
+    return null;
+  }
+
+  saveProduct(data: any) {
+    const userId = this.getUserIdFromToken();
+    if (!userId) {
+      console.error('User ID not found in the token.');
+      return throwError('User ID not found in the token.');
+    }
+
+    data.userId = userId;
+
+    return this.http.post(this.posturl, data);
+  }
+}
+```
+
+2. Update ProductdetailComponent to Use CartService:
+Now, the `CartService` will automatically add the user ID from the bearer token when calling the API to save the product. You can remove the hardcoded user ID from the `addToCart` method.
+
+```typescript
+import { Component, OnInit, Input } from '@angular/core';
+import { Router } from '@angular/router';
+import { CartService } from '../services/cart.service';
+
+@Component({
+  selector: 'app-productdetail',
+  templateUrl: './productdetail.component.html',
+  styleUrls: ['./productdetail.component.css']
+})
+export class ProductdetailComponent implements OnInit {
+  @Input() productdetail: any = {};
+  selectedQuantity: number = 1;
+  cartDetail: any[] = [];
+  isCart: boolean = false;
+
+  constructor(private router: Router, private cartService: CartService) {}
+
+  ngOnInit() {
+    console.log('productdetail', this.productdetail);
+  }
+
+  addToCart() {
+    const productId = this.productdetail.id;
+    const quantity = this.selectedQuantity;
+    const price = this.productdetail.price;
+
+    const productData = {
+      items: [
+        {
+          productId: productId,
+          quantity: quantity,
+          price: price,
+        },
+      ],
+    };
+
+    this.cartService.saveProduct(productData).subscribe(
+      (response) => {
+        // Handle the response from the server if needed.
+        console.log('Product added to cart successfully:', response);
+      },
+      (error) => {
+        // Handle errors if any.
+        console.error('Error while adding product to cart:', error);
+      }
+    );
+  }
+}
+```
+
+With these changes, the `CartService` will automatically extract the user ID from the bearer token and add it to the `productData` when calling the `saveProduct` method. Remember to handle scenarios where the user is not logged in or the token is invalid or expired.
+
+
+
+\\
+
+
+
+|\
+---------------------------------
+<app-header></app-header>
+<div *ngIf="cartData">
+  <h4 class="text-start mx-4  text-decoration-underline">Shopping Cart</h4>
+  <div class="row" *ngIf="cartData[0]?.items.length > 0">
+    <div class="col-md-2 m-lg-4" *ngFor="let item of cartData[0]?.items">
+      <div class="card mb-3">
+        <div class="post-image">
+          <img
+            class="img-fluid"
+            [src]="'http://localhost:5000/uploads/' + item.productId.image"
+          />
+        </div>
+        <div class="card-body">
+          <h5 class="card-title">Product Name: {{ item.productId.name }}</h5>
+          <p class="card-text">
+            Price: {{ item.productId.price * item.quantity }}
+          </p>
+
+          <label for="quantity">Quantity:</label>
+          <select
+            id="quantity"
+            [(ngModel)]="item.quantity"
+            (change)="updateCartItem(item)"
+          >
+            <option *ngFor="let quantity of quantities" [value]="quantity">
+              {{ quantity }}
+            </option>
+          </select>
+          <p>Colour: {{ item.productId.colour }}</p>
+          <!-- <p>Colour: {{ item.id }}</p> -->
+          <button class="btn btn-danger" (click)="removeItemFromCart(item.id)">
+            Delete
+          </button>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+<button class="btn btn-dark mx-4" (click)="goBack()">Back</button>
+-this is my /home/dev/Desktop/angular-demo/demo/src/app/cartpage/cartpage.component.html file
+
+import { CartService } from '../services/cart.service';
+import jwtDecode from 'jwt-decode';
+import { Component } from '@angular/core';
+
+
+@Component({
+  selector: 'app-cartpage',
+  templateUrl: './cartpage.component.html',
+  styleUrls: ['./cartpage.component.css']
+})
+export class CartpageComponent  {
+
+  userId: string = '';
+  cartData: any;
+  quantities: number[] = [1, 2, 3, 4, 5];
+
+  constructor(private cartService: CartService) { }
+
+  ngOnInit(): void {
+    this.userId = this.getUserIdFromToken(); // Get userId from the token in localStorage
+    this.getCartDataByUserId();
+  }
+
+  getCartDataByUserId() {
+    this.cartService.getCartData(this.userId).subscribe(
+      (data: any) => {
+        this.cartData = data;
+        console.log('Cart Data:', this.cartData);
+        // console.log('cartitem',this.cartData.items);
+      },
+      (error) => {
+        console.error('Error fetching cart data:', error);
+      }
+    );
+  }
+
+
+
+  getUserIdFromToken(): string {
+    const token = localStorage.getItem('token');
+    if (token) {
+      const decodedToken: any = jwtDecode(token);
+      if (decodedToken && decodedToken.userId) {
+        return decodedToken.userId;
+      }
+    }
+    return ''; // Return an empty string if the userId is not found in the token
+  }
+
+  removeItemFromCart(itemId: string) {
+    this.cartService.removeItemFromCart(this.userId, itemId).subscribe(
+      (response: any) => {
+        // Item removed successfully, update the cartData
+        this.getCartDataByUserId();
+        console.log('Item removed from cart:', response);
+      },
+      (error) => {
+        console.error('Error removing item from cart:', error);
+      }
+    );
+  }
+
+
+
+  updateCartItem(item: any) {
+    console.log("item");
+
+    this.cartService.updateCartItem(this.userId, item.id, item.quantity).subscribe(
+      (response: any) => {
+        console.log('Cart item updated:', response);
+      },
+      (error) => {
+        console.error('Error updating cart item:', error);
+      }
+    );
+  }
+
+
+  goBack() {
+    console.log("windo",window.history);
+
+    window.history.back();
+  }
+}
+
+-this is my /home/dev/Desktop/angular-demo/demo/src/app/cartpage/cartpage.component.ts file
+
+import { Injectable } from '@angular/core';
+import { HttpClient, HttpHeaders } from '@angular/common/http';
+
+@Injectable({
+  providedIn: 'root'
+})
+export class CartService {
+
+  private apiUrl = 'http://localhost:5000/cart';
+
+  constructor(private http: HttpClient) { }
+
+  // getCartData(userId: string) {
+  //   const url = `${this.apiUrl}/${userId}`;
+  //   return this.http.get(url);
+  // }
+  getCartData(userId: string) {
+    const url = `${this.apiUrl}/${userId}`;
+
+    // Get the token from localStorage
+    const token = localStorage.getItem('token');
+
+    // Create headers object with Authorization header containing the token
+    const headers = new HttpHeaders().set('Authorization', `Bearer ${token}`);
+    // console.log("headers",headers);
+
+    // Pass the headers in the request options
+    const requestOptions = { headers: headers };
+    // console.log("reqop",requestOptions);
+
+    return this.http.get(url, requestOptions);
+  }
+
+  saveProduct(data: any) {
+    return this.http.post('http://localhost:5000/createCartProduct', data);
+  }
+
+  removeItemFromCart(userId: string, itemId: string) {
+    const url = `${this.apiUrl}/${userId}/items/${itemId}`;
+    return this.http.delete(url);
+  }
+
+  updateCartItem(userId: string, itemId: string, quantity: number) {
+    const url = `${this.apiUrl}/${userId}/items/${itemId}`;
+    const payload = { quantity }; // Create the payload to update the quantity
+    return this.http.patch(url, payload);
+  }
+}
+
+-this is my /home/dev/Desktop/angular-demo/demo/src/app/services/cart.service.ts file
+
+-I want to change my update cart quantity functionality  dropdown i have 5 option in it i want last option "5+" instead of "5" if user clicks on "5+" hide dropdown and show  two things custom input to fill quantity and also show update button ,oncliking update button call api and update quantity

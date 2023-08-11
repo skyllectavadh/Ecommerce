@@ -1,0 +1,35 @@
+<div class="row search-item" *ngFor="let item of searchResult">
+  <div class="col-sm-3">
+    <img class="img-fluid" [src]="'http://localhost:5000/uploads/' + item.image" [alt]="item.name">
+  </div>
+  <div class="col-sm-8 details">
+
+    <p><b>Name: {{item.name}}</b></p>
+    <p>Description: {{item.description}}</p>
+    <p>Brand: {{item.brand}}</p>
+    <p>Price: {{item.price}}</p>
+    <p>Category: {{item.category}}</p>
+    <p>Guarantee : {{item.guarantee}}</p>
+  </div>
+</div>
+
+
+<!-- <div *ngIf="searchResult && searchResult.length > 0">
+  <div class="row search-item" *ngFor="let item of searchResult">
+    <div class="col-sm-3">
+      <img class="img-fluid" [src]="'http://localhost:5000/uploads/' + item.image" [alt]="item.name">
+    </div>
+    <div class="col-sm-8 details">
+      <p><b>Name: {{item.name}}</b></p>
+      <p>Description: {{item.description}}</p>
+      <p>Brand: {{item.brand}}</p>
+      <p>Price: {{item.price}}</p>
+      <p>Category: {{item.category}}</p>
+      <p>Guarantee: {{item.guarantee}}</p>
+    </div>
+  </div>
+</div>
+
+<div *ngIf="!searchResult || searchResult.length === 0">
+  <p>No results found.</p>
+</div> -->

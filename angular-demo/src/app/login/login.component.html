@@ -1,0 +1,51 @@
+
+<form #loginForm="ngForm" (ngSubmit)="getLoginFormData(loginForm.value)" class="h-100 d-flex align-items-center justify-content-center my-5">
+  <div>
+    <h3 class="text-decoration-underline">Login Form</h3>
+
+  <input
+  type="email"
+  ngModel
+    name="email"
+    placeholder="email"
+    required
+    email
+    #email="ngModel"
+    class="my-2"
+  />
+  <div
+    *ngIf="email.invalid && (email.dirty || email.touched)"
+    class="error-message"
+  >
+  <div *ngIf="email.errors?.['required']">Field is required</div>
+  <div *ngIf="email.errors?.['email']">Invalid email format</div>
+</div>
+
+<br />
+<input
+type="password"
+ngModel
+name="password"
+placeholder="password"
+required
+minlength="6"
+#password="ngModel"
+/>
+<div
+*ngIf="password.invalid && (password.dirty || password.touched)"
+class="error-message"
+>
+<div *ngIf="password.errors?.['required']">Field is required</div>
+<!-- Validation error messages -->
+</div>
+<br />
+<button
+class="btn btn-primary"
+type="submit"
+[disabled]="loginForm.invalid"
+>
+Login
+</button>
+</div>
+</form>
+<!--   -->
