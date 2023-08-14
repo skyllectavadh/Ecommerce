@@ -47,7 +47,7 @@ const httpServer = require("http").createServer();
 const io = new Server(server, {
   cors: {
     origins: "https://localhost:4200",
-    methods: ["GET", "POST"]
+    // methods: ["GET", "POST"]
   }
 })
 

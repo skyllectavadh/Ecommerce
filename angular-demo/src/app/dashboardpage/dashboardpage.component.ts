@@ -1,7 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { ProductService } from '../services/product.service';
 import { SearchService } from '../services/search.service';
-// import { io, Socket } from 'socket.io-client';
+import { io, Socket } from 'socket.io-client';
 
 @Component({
   selector: 'app-dashboardpage',
@@ -9,7 +9,7 @@ import { SearchService } from '../services/search.service';
   styleUrls: ['./dashboardpage.component.css']
 })
 export class DashboardComponent implements OnInit {
-  // private socket: Socket;
+  private socket: Socket;
   products: any[] = [];
   totalPages: number = 0;
   currentPage: number = 1;
@@ -22,7 +22,7 @@ export class DashboardComponent implements OnInit {
 
   constructor(private productService: ProductService, private searchService: SearchService) {
 
-    // this.socket = io('http://localhost:4400');
+    this.socket = io('http://localhost:4400',{ transports : ['websocket'] });
   }
 
   private sortField: string = 'price';
@@ -37,49 +37,75 @@ export class DashboardComponent implements OnInit {
     // You can perform any further actions with the search value as needed.
   }
 
-  ngOnInit() {
-    // Subscribe to the searchProducts observable to get updates when search data changes
-    this.searchService.getSearchProducts().subscribe((response: any) => {
-      // console.log("1",response);
-      this.products = response.products || [];
-      this.currentPage = response.currentPage || 1;
-      this.totalPages = response.totalPages || 0;
-      if (this.products && this.products.length > 0) {
-        this.isSearch = true;
+  // ngOnInit() {
+  //   // Subscribe to the searchProducts observable to get updates when search data changes
+  //   this.searchService.getSearchProducts().subscribe((response: any) => {
+  //     // console.log("1",response);
+  //     this.products = response.products || [];
+  //     this.currentPage = response.currentPage || 1;
+  //     this.totalPages = response.totalPages || 0;
+  //     if (this.products && this.products.length > 0) {
+  //       this.isSearch = true;
+  //     }
+  //   });
 
-      }
+  //   // Fetch initial products
+  //   this.fetchProducts();
+  // }
+
+  ngOnInit(): void {
+
+    this.searchService.getSearchProducts().subscribe((response: any) => {
+      //     // console.log("1",response);
+          this.products = response.products || [];
+          this.currentPage = response.currentPage || 1;
+          this.totalPages = response.totalPages || 0;
+          if (this.products && this.products.length > 0) {
+            this.isSearch = true;
+          }
+        });
+
+    // Listen for the 'createdData' event from the backend
+    this.socket.on('createdData', (data) => {
+      this.products.push(data.data);  
     });
 
-    // Fetch initial products
+    // Listen for the 'getData' event from the backend
+    this.socket.on('getData', (data) => {
+      this.products = data.data; 
+    });
+
+    
+    this.socket.on('editData', (data) => {
+      const newData = data.data;
+      const indexToUpdate = this.products.findIndex(product => product.id === newData.id);
+    
+      if (indexToUpdate !== -1) {
+        // Update the existing data with the new data
+        this.products[indexToUpdate] = newData;
+      } else {
+        console.log("Data not found in the array.");
+      }
+    });
+    
+    this.socket.on('deleteData', (data) => {
+      const idToDelete = data.data.id; // Access the ID from the data object
+    
+      // Create a new array excluding the item to delete
+      this.products = this.products.filter(product => product.id !== idToDelete);
+    });
+    
     this.fetchProducts();
   }
 
-  // ngOnInit(): void {
-
-  //   // Listen for the 'createdData' event from the backend
-  //   this.socket.on('createdData', (data) => {
-  //     console.log('Received created data from socket:', data);
-
-  //     this.products.push(data.data);
-  //   });
-
-  //   // Listen for the 'getData' event from the backend
-  //   this.socket.on('getData', (data) => {
-  //     console.log('Received data from socket:', data);
-  //     // Handle the received product data as needed
-  //     this.products = data.data; // Assuming data structure is similar to what you sent
-  //   });
-  // }
-
   home(){
-
     this.productService.getProducts(this.currentPage = 1).subscribe(
-
       (response: any) => {
         this.products = response.products || [];
         // this.currentPage = response.currentPage || 1;
         this.totalPages = response.totalPages || 0;
         if (this.isSearch===false) {
+        
           // console.log("false");
 
           this.isSearch===false

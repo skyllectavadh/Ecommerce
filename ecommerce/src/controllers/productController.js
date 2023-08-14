@@ -82,7 +82,7 @@ exports.getProducts = async (req, res) => {
       currentPage: page,
       message:"Product fetch successfully",
       products: getProducts,
-    });
+    }); 
     socket.getProduct('getData', getProducts); 
   } catch (error) {
     res.status(400).json({
@@ -139,6 +139,7 @@ exports.deleteProduct = async (req, res) => {
       message: "Product deleted successfully.",
       deletedProduct: deleteProduct,
     });
+    socket.deleteProduct('deleteData', deleteProduct);
   } catch (error) {
     res.status(500).json({
       success: false,
@@ -173,6 +174,7 @@ exports.updateProduct= async (req, res) => {
         message: "Product updated successfully.",
         updatedProduct: updatedProduct,
       });
+      socket.editProduct('editData', updatedProduct);
     } catch (error) {
       res.status(500).json({
         success: false,
