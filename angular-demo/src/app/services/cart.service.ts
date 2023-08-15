@@ -1,20 +1,3 @@
-// import { Injectable } from '@angular/core';
-// import { HttpClient } from '@angular/common/http';
-
-// @Injectable({
-//   providedIn: 'root'
-// })
-// export class CartService {
-
-//   constructor(private http: HttpClient) {}
-//   posturl = 'http://localhost:5000/createCartProduct';
-//       saveProduct(data: any) {
-//         // console.log("d",data);
-//         return this.http.post(this.posturl,data);
-//       }
-// }
-
-
 import { Injectable } from '@angular/core';
 import { HttpClient, HttpHeaders } from '@angular/common/http';
 
@@ -24,6 +7,7 @@ import { HttpClient, HttpHeaders } from '@angular/common/http';
 export class CartService {
 
   private apiUrl = 'http://localhost:5000/cart';
+  private api = 'http://localhost:5000/';
 
   constructor(private http: HttpClient) { }
 
@@ -31,6 +15,12 @@ export class CartService {
   //   const url = `${this.apiUrl}/${userId}`;
   //   return this.http.get(url);
   // }
+  createProductOrder(userId: string, cartId: string) {
+    return this.http.post(`${this.api}createProductOrder`, { userId, cartId });
+  }
+  
+  
+
   getCartData(userId: string) {
     const url = `${this.apiUrl}/${userId}`;
 
@@ -62,7 +52,24 @@ export class CartService {
     const payload = { quantity }; // Create the payload to update the quantity
     return this.http.patch(url, payload);
   }
+
+  totalCartPrice(userId:string){
+    const url = `${this.apiUrl}/${userId}/totalPrice`;
+    const token = localStorage.getItem('token');
+
+    const headers = new HttpHeaders().set('Authorization', `Bearer ${token}`);
+
+    const requestOptions = { headers: headers };
+    return this.http.get(url,requestOptions)
+  }
+
+  createOrder(){
+
+  }
+  
 }
+
+
   // deleteCartItem(userId:string,itemId:string){
   //   const url = `${this.apiUrl}/${userId}/items/${itemId}`
   //   console.log("delitem",url);
@@ -73,4 +80,18 @@ export class CartService {
   // router.patch('/cart/:userId/items/:itemId', cartController.updateCartItem);
 
 
+// import { Injectable } from '@angular/core';
+// import { HttpClient } from '@angular/common/http';
 
+// @Injectable({
+//   providedIn: 'root'
+// })
+// export class CartService {
+
+//   constructor(private http: HttpClient) {}
+//   posturl = 'http://localhost:5000/createCartProduct';
+//       saveProduct(data: any) {
+//         // console.log("d",data);
+//         return this.http.post(this.posturl,data);
+//       }
+// }      

@@ -278,7 +278,7 @@ exports.getCartByUserId = async (req, res) => {
         {
           path: 'items.productId',
           select: '_id name price colour image stock',
-          model: 'Product', 
+          model: 'Product',
         },
       ]);
   
@@ -418,6 +418,8 @@ exports.getCartByUserId = async (req, res) => {
       res.status(500).send("Error calculating total price: " + error.message);
     }
   };
+
+  
   
 
 

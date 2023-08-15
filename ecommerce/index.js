@@ -14,6 +14,7 @@ const router = require("./src/routers/registerRouter");
 const loginRouter = require("./src/routers/loginRouter");
 const productRouter = require("./src/routers/productRouter");
 const cartRouter = require("./src/routers/cartRouter")
+const orderRouter = require("./src/routers/orderRouter")
 
 app.use("/uploads", express.static(path.join(__dirname, "uploads")))
 
@@ -22,6 +23,8 @@ app.use(router);
 app.use("/", loginRouter);
 app.use("/", productRouter);
 app.use("/",cartRouter)
+app.use("/",orderRouter)
+
 
 connectToMongoDB()
   .then(() => {

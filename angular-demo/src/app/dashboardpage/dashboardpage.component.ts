@@ -111,15 +111,12 @@ export class DashboardComponent implements OnInit {
           this.isSearch===false
         } else {
           // console.log("true");
-
           this.isSearch===true
         }
   },
   (error) => {
     console.error('Error fetching initial products', error);
-  }
-);
-
+  });
   }
 
   fetchProducts() {

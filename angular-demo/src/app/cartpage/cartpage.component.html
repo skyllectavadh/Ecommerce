@@ -17,6 +17,13 @@
 <app-header></app-header>
 <div *ngIf="cartData">
   <h4 class="text-start mx-4 text-decoration-underline">Shopping Cart</h4>
+  <p class="d-flex justify-content-end my-0 mx-2">Subtotal ({{cartData && cartData[0]?.items?.length}} items): &#x20b9;<span><h5>{{totalPrice?.totalPrice}}</h5></span></p>
+  <div class="d-flex justify-content-end">
+<!-- <button class="btn btn-warning">Proceed to Buy</button> -->
+<button type="button" class="btn btn-warning mx-2" data-bs-toggle="modal" data-bs-target="#staticBackdrop">
+  Proceed to Buy
+</button>
+</div>  
   <div class="row" *ngIf="cartData[0]?.items?.length > 0">
     <div class="col-md-2 m-lg-4" *ngFor="let item of cartData[0]?.items">
       <div class="card mb-3">
@@ -30,6 +37,9 @@
           <h5 class="card-title">Product Name: {{ item?.productId?.name }}</h5>
           <p class="card-text">
             Price: {{ item.productId.price * item?.quantity }}
+          </p>
+          <p class="card-text">
+            Price: {{ item.productId.price }}
           </p>
 
           <!-- <label for="quantity">Quantity:</label>
@@ -68,14 +78,16 @@
           <p>Colour: {{ item?.productId?.colour }}</p>
           <p>Stock: {{ item?.productId?.stock }}</p>
           <!-- <p>Colour: {{ item.id }}</p> -->
+          <div class="d-flex">
           <button
             class="btn btn-danger"
             (click)="removeItemFromCart(item?.id)"
           >
             Delete
           </button>
-          <div *ngIf="isUpdate">
+          <div *ngIf="isUpdate" class="mx-5">
             <button class="btn btn-dark">Buy Now</button>
+          </div>
           </div>
         </div>
       </div>
@@ -83,6 +95,32 @@
   </div>
 </div>
 <button class="btn btn-dark mx-4" (click)="goBack()">Back</button>
+
+
+
+<!-- Button trigger modal -->
+<!-- <button type="button" class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#staticBackdrop">
+  Launch static backdrop modal
+</button> -->
+
+<!-- Modal -->
+<div class="modal fade" id="staticBackdrop" data-bs-backdrop="static" data-bs-keyboard="false" tabindex="-1" aria-labelledby="staticBackdropLabel" aria-hidden="true">
+  <div class="modal-dialog">
+    <div class="modal-content">
+      <div class="modal-header">
+        <!-- <h5 class="modal-title" id="staticBackdropLabel">Modal title</h5> -->
+        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+      </div>
+      <h5 class="modal-body text-center text-capitalize">
+       Are you Sure?
+      </h5>
+      <div class="modal-footer">
+        <button type="button" class="btn btn-danger" data-bs-dismiss="modal">Deny</button>
+        <button type="button" class="btn btn-success" data-bs-dismiss="modal" (click)="confirmOrder(cartData[0]._id)">Confirm</button>
+      </div>
+    </div>
+  </div>
+</div>
 
 <!-- <p class="card-text">Quantity: {{ item.quantity }}</p> -->
 <!-- Dropdown for Quantity -->

@@ -12,6 +12,7 @@ export class CartpageComponent  {
 
   userId: string = '';
   cartData: any;
+  totalPrice:any;
   quantities: number[] = [1, 2, 3, 4, 5,6,7,8,9,10];
   isUpdate:boolean = true;
 
@@ -20,6 +21,7 @@ export class CartpageComponent  {
   ngOnInit(): void {
     this.userId = this.getUserIdFromToken(); // Get userId from the token in localStorage
     this.getCartDataByUserId();
+    this.getTotalCartPrice();
   }
 
   getCartDataByUserId() {
@@ -27,13 +29,25 @@ export class CartpageComponent  {
       (data: any) => {
         // this.cartData = data.map((item: any) => ({ ...item, editQuantity: false }));
         this.cartData = data;
-        // console.log('Cart Data:', this.cartData);
-        // console.log('cartitem',this.cartData.items);
+
+        console.log('Cart Data:', this.cartData);
+        // console.log('cartitem',this.cartData[0]?.items.length);
       },
       (error) => {
         console.error('Error fetching cart data:', error);
       }
     );
+  }
+  
+
+  getTotalCartPrice(){
+    this.cartService.totalCartPrice(this.userId).subscribe(
+      (data:any)=>{
+        this.totalPrice = data;
+        // console.log("total",this.totalPrice);
+        
+      }
+    )
   }
 
 
@@ -54,6 +68,7 @@ export class CartpageComponent  {
       (response: any) => {
         // Item removed successfully, update the cartData
         this.getCartDataByUserId();
+        this.getTotalCartPrice()
         console.log('Item removed from cart:', response);
       },
       (error) => {
@@ -98,6 +113,7 @@ export class CartpageComponent  {
       (response: any) => {
         console.log('Cart item updated:', response);
         this.isUpdate = true;
+        this.getTotalCartPrice()
       },
       (error) => {
         console.error('Error updating cart item:', error);
@@ -112,7 +128,25 @@ export class CartpageComponent  {
 
     window.history.back();
   }
+
+  confirmOrder(cartId: string) {
+    this.cartService.createProductOrder(this.userId, cartId).subscribe(
+      (response: any) => {
+        console.log('Order created:', response);
+        // Optionally, you can reset the cart data or perform any other actions
+        // after successfully creating the order.
+      },
+      (error) => {
+        console.error('Error creating order:', error);
+      }
+    );
+  }
+  
+  
+  
 }
+
+
 
 
   // updateCartItem(item: any) {//or 1
