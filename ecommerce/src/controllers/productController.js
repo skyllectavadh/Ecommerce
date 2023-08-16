@@ -1,5 +1,5 @@
 const { Product, validateProduct } = require("../models/productModel");
-const socket = require("../socket/index")
+  const socket = require("../socket/index")
 
 
 exports.createProduct = async (req, res) => {

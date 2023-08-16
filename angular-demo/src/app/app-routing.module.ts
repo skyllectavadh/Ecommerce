@@ -10,6 +10,7 @@ import { CartpageComponent } from './cartpage/cartpage.component';
 import { ProductdetailComponent } from './productdetail/productdetail.component';
 import { BuypageComponent } from './buypage/buypage.component';
 import { SearchComponent } from './search/search.component';
+import { OrderpageComponent } from './orderpage/orderpage.component';
 // import { SearchResultsComponent } from './search-results/search-results.component';
 
 const routes: Routes = [
@@ -49,6 +50,10 @@ const routes: Routes = [
    {
     path: 'buypage',
     component: BuypageComponent,
+   },
+   {
+    path: 'order',
+    component: OrderpageComponent,
    },
  
 

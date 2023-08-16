@@ -37,21 +37,7 @@ export class DashboardComponent implements OnInit {
     // You can perform any further actions with the search value as needed.
   }
 
-  // ngOnInit() {
-  //   // Subscribe to the searchProducts observable to get updates when search data changes
-  //   this.searchService.getSearchProducts().subscribe((response: any) => {
-  //     // console.log("1",response);
-  //     this.products = response.products || [];
-  //     this.currentPage = response.currentPage || 1;
-  //     this.totalPages = response.totalPages || 0;
-  //     if (this.products && this.products.length > 0) {
-  //       this.isSearch = true;
-  //     }
-  //   });
-
-  //   // Fetch initial products
-  //   this.fetchProducts();
-  // }
+  
 
   ngOnInit(): void {
 
@@ -119,18 +105,36 @@ export class DashboardComponent implements OnInit {
   });
   }
 
+  // fetchProducts() {
+  //   this.productService.getProducts(this.currentPage, this.searchTerm, this.sortField, this.sortOrder).subscribe(
+  //     (response: any) => {
+  //       this.products = response.products || [];
+  //       this.currentPage = response.currentPage || 1;
+  //       this.totalPages = response.totalPages || 0;
+  //       this.isProduct = this.products.some(product => product.stock > 0);
+  //     },
+  //     (error) => {
+  //       console.error('Error fetching initial products', error);
+  //     }
+  //   );
+  // }
+  
+
   fetchProducts() {
     // Fetch all products using the ProductService
     this.productService.getProducts(this.currentPage,this.searchTerm,this.sortField, this.sortOrder).subscribe(
 
       (response: any) => {
         this.products = response.products || [];
+        console.log("pro",this.products);
+        
         this.currentPage = response.currentPage || 1;
         this.totalPages = response.totalPages || 0;
-        this.isProduct=false
+        this.isProduct = this.products.some(product => product.stock > 0);
+        this.isProduct = false
         if (this.isSearch===false) {
           // console.log("false");
-
+          
           this.isSearch===false
         } else {
           // console.log("true");
@@ -140,7 +144,7 @@ export class DashboardComponent implements OnInit {
 
       },
       (error) => {
-        console.error('Error fetching initial products', error);
+        console.error('Error fetching  initial products', error);
       }
     );
   }
@@ -228,6 +232,22 @@ export class DashboardComponent implements OnInit {
   }
 }
 
+
+// ngOnInit() {
+  //   // Subscribe to the searchProducts observable to get updates when search data changes
+  //   this.searchService.getSearchProducts().subscribe((response: any) => {
+  //     // console.log("1",response);
+  //     this.products = response.products || [];
+  //     this.currentPage = response.currentPage || 1;
+  //     this.totalPages = response.totalPages || 0;
+  //     if (this.products && this.products.length > 0) {
+  //       this.isSearch = true;
+  //     }
+  //   });
+
+  //   // Fetch initial products
+  //   this.fetchProducts();
+  // }
 
 
 

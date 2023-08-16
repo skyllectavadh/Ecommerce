@@ -18,6 +18,10 @@ export class CartService {
   createProductOrder(userId: string, cartId: string) {
     return this.http.post(`${this.api}createProductOrder`, { userId, cartId });
   }
+
+  getOrder(){
+      return this.http.get(`${this.api}getOrders`);
+  }
   
   
 
@@ -63,9 +67,7 @@ export class CartService {
     return this.http.get(url,requestOptions)
   }
 
-  createOrder(){
 
-  }
   
 }
 

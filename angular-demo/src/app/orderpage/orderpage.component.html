@@ -1,0 +1,54 @@
+<table>
+  <thead>
+    <tr>
+        <th>No.</th>
+      <th>User Email</th>
+      <th>Product Names</th>
+      <th>Product Stock</th>
+      <th>Product Price</th>
+      <th>Product Quantity</th>
+      <th>Status</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr *ngFor="let order of orderData?.orders; let i = index">
+        <td>{{ i + 1 }}.</td>
+      <td>{{ order?.userId?.email }}</td>
+      <td>
+        <ul>
+          <li *ngFor="let item of order?.cartId?.items">
+            {{ item?.productId?.name }}
+          </li>
+        </ul>
+      </td>
+      <td>
+        <ul>
+          <li *ngFor="let item of order?.cartId?.items">
+            {{ item?.productId?.stock }}
+          </li>
+        </ul>
+      </td>
+      <td>
+        <ul>
+          <li *ngFor="let item of order?.cartId?.items">
+            {{ item?.productId?.price }}
+          </li>
+        </ul>
+      </td>
+      <td>
+        <ul>
+          <li *ngFor="let item of order?.cartId?.items">
+            {{ item?.quantity }}
+          </li>
+        </ul>
+      </td>
+      <td>
+        <ul>
+          <li *ngFor="let item of order?.cartId?.items">
+            {{ item?.status }}
+          </li>
+        </ul>
+      </td>
+    </tr>
+  </tbody>
+</table>

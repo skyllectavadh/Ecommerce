@@ -75,7 +75,7 @@ export class ProductdetailComponent implements OnInit {
       console.error('Token not found in localStorage.');
     }
   }
-
+}
   // addToCart() {
   //   const productId = this.productdetail.id;
   //   const quantity = this.selectedQuantity;
@@ -114,7 +114,7 @@ export class ProductdetailComponent implements OnInit {
   //     console.error('Token not found in localStorage.');
   //   }
   // }
-}
+
 
 // import { Component, OnInit } from '@angular/core';
 // import { ActivatedRoute } from '@angular/router';

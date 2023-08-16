@@ -2,6 +2,7 @@
 import { Component } from '@angular/core';
 import { CartService } from '../services/cart.service';
 import jwtDecode from 'jwt-decode';
+import { io, Socket } from 'socket.io-client';
 
 @Component({
   selector: 'app-cartpage',
@@ -9,19 +10,26 @@ import jwtDecode from 'jwt-decode';
   styleUrls: ['./cartpage.component.css']
 })
 export class CartpageComponent  {
-
+  private socket: Socket;
   userId: string = '';
   cartData: any;
   totalPrice:any;
   quantities: number[] = [1, 2, 3, 4, 5,6,7,8,9,10];
   isUpdate:boolean = true;
 
-  constructor(private cartService: CartService) { }
+  constructor(private cartService: CartService) { 
+    this.socket = io('http://localhost:4400',{ transports : ['websocket'] });
+  }
 
   ngOnInit(): void {
     this.userId = this.getUserIdFromToken(); // Get userId from the token in localStorage
     this.getCartDataByUserId();
     this.getTotalCartPrice();
+    
+    this.socket.on('getCart', (data) => {
+      this.cartData = data.data; 
+    });
+    // this.getCartDataByUserId()
   }
 
   getCartDataByUserId() {
@@ -30,7 +38,7 @@ export class CartpageComponent  {
         // this.cartData = data.map((item: any) => ({ ...item, editQuantity: false }));
         this.cartData = data;
 
-        console.log('Cart Data:', this.cartData);
+        // console.log('Cart Data:', this.cartData);
         // console.log('cartitem',this.cartData[0]?.items.length);
       },
       (error) => {
@@ -69,7 +77,7 @@ export class CartpageComponent  {
         // Item removed successfully, update the cartData
         this.getCartDataByUserId();
         this.getTotalCartPrice()
-        console.log('Item removed from cart:', response);
+        // console.log('Item removed from cart:', response);
       },
       (error) => {
         console.error('Error removing item from cart:', error);
@@ -111,12 +119,12 @@ export class CartpageComponent  {
 
     this.cartService.updateCartItem(this.userId, item.id, item.quantity).subscribe(
       (response: any) => {
-        console.log('Cart item updated:', response);
+        // console.log('Cart item updated:', response);
         this.isUpdate = true;
         this.getTotalCartPrice()
       },
       (error) => {
-        console.error('Error updating cart item:', error);
+        console.log('Error updating cart item:', error);
         this.isUpdate = false;
       }
     );
@@ -133,6 +141,7 @@ export class CartpageComponent  {
     this.cartService.createProductOrder(this.userId, cartId).subscribe(
       (response: any) => {
         console.log('Order created:', response);
+        this.getCartDataByUserId()
         // Optionally, you can reset the cart data or perform any other actions
         // after successfully creating the order.
       },

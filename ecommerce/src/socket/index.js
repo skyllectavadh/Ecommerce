@@ -25,6 +25,11 @@ exports.getProduct = (event, data) => {
     global.io.emit(event, mapData(data))
 }
 
+exports.getCartsByUserId = (event, data) => {
+    // console.log("check data :- ",data)
+    global.io.emit(event, mapData(data))
+}
+
 exports.editProduct = (event, data) => {
     // console.log("edit data :- ",data)
     global.io.emit(event, mapData(data))

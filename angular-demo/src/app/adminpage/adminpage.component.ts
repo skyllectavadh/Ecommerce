@@ -1,6 +1,5 @@
 import { Component,ViewChild } from '@angular/core';
 import { UserdataService } from '../services/userdata.service';
-// import { NgbModal } from '@ng-bootstrap/ng-bootstrap';
 import { Router } from '@angular/router';
 
 
@@ -23,9 +22,11 @@ export class AdminpageComponent {
 
   getRegisteredUsersData() {
     this.userDataService.users().subscribe((data: any) => {
-      this.registeredUsers = data;
+      this.registeredUsers = data.data; // Assign the array to registeredUsers
+      console.log("data", this.registeredUsers);
     });
   }
+  
 
   deleteUser(user: any) {
     const index = this.registeredUsers.indexOf(user);
@@ -38,6 +39,9 @@ export class AdminpageComponent {
     this.router.navigate(['/edit', user._id], { state: { user } });
   }
 
+  redirectToOrder(){
+    this.router.navigate(['/order'])
+  }
 
 
 }

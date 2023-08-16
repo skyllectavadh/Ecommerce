@@ -20,6 +20,7 @@ import { BuypageComponent } from './buypage/buypage.component';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { SearchComponent } from './search/search.component';
 import { SearchService } from './services/search.service';
+import { OrderpageComponent } from './orderpage/orderpage.component';
 
 // import { SearchResultsComponent } from './search-results/search-results.component';
 
@@ -38,7 +39,8 @@ import { SearchService } from './services/search.service';
     ProductdetailComponent,
     HeaderComponent,
     BuypageComponent,
-    SearchComponent
+    SearchComponent,
+    OrderpageComponent
     // SearchResultsComponent,
     // SearchPipePipe,
 
