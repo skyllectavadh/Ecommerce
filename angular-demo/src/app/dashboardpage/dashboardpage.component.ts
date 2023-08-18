@@ -126,15 +126,14 @@ export class DashboardComponent implements OnInit {
 
       (response: any) => {
         this.products = response.products || [];
-        console.log("pro",this.products);
+        // console.log("pro",this.products);
         
         this.currentPage = response.currentPage || 1;
         this.totalPages = response.totalPages || 0;
         this.isProduct = this.products.some(product => product.stock > 0);
         this.isProduct = false
         if (this.isSearch===false) {
-          // console.log("false");
-          
+          // console.log("false");          
           this.isSearch===false
         } else {
           // console.log("true");

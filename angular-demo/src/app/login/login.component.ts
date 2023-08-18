@@ -9,7 +9,7 @@ import { Router } from '@angular/router';
 })
 export class LoginComponent {
   loginusers: any;
-
+  isError:any;
   constructor(private userLoginData: UserdataService, private router: Router) {}
 
   getLoginFormData(data: any) {
@@ -28,15 +28,20 @@ export class LoginComponent {
         } else if (role === 'user') {
           this.router.navigate(['']); // Navigate to dashboard
         } else {
-          console.log('Invalid role:', role);
+          // console.log('Invalid role:', role);
         }
       },
       (error: any) => {
-        console.error('Login failed:', error);
+        this.isError = true;
+        console.log('Login failed:', error);
         // Handle any login failure scenarios, such as displaying an error message
       }
     );
   }
+
+  redirectToRegistration(){
+    this.router.navigate(['/registration'])
+}
 }
 
 

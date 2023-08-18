@@ -11,6 +11,10 @@ export class CartService {
 
   constructor(private http: HttpClient) { }
 
+  deleteOrderItem(orderId: string, itemId: string) {
+    const url = `${this.api}deleteOrderItem/${orderId}/${itemId}`;
+    return this.http.delete(url);
+  }
   
   createProductOrder(orderData: any) {
     return this.http.post(`${this.api}createProductOrder`, orderData);
@@ -69,7 +73,6 @@ export class CartService {
     const requestOptions = { headers: headers };
     return this.http.get(url,requestOptions)
   }
-
 
   
 }

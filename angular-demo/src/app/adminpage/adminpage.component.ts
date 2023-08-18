@@ -23,7 +23,7 @@ export class AdminpageComponent {
   getRegisteredUsersData() {
     this.userDataService.users().subscribe((data: any) => {
       this.registeredUsers = data.data; // Assign the array to registeredUsers
-      console.log("data", this.registeredUsers);
+      // console.log("data", this.registeredUsers);
     });
   }
   

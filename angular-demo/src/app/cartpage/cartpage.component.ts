@@ -40,8 +40,8 @@ export class CartpageComponent  {
         this.cartData = data;
         this.cartId =this.cartData[0]?._id
         
-        console.log('Cart Datas:', this.cartData);
-        console.log('cartitem',this.cartId);
+        // console.log('Cart Datas:', this.cartData);
+        // console.log('cartitem',this.cartId);
       },
       (error) => {
         console.error('Error fetching cart data:', error);

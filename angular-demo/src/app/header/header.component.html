@@ -1,3 +1,22 @@
+<header>
+  <div class="container">
+    <nav class="navbar navbar-light bg-light justify-content-end mt-5 mb-5">
+      <div class="d-flex">
+        <form class="d-flex justify-content-end">
+          <input class="form-control me-2" type="search" placeholder="Search" aria-label="Search" #searchInput>
+          <button (click)="handleSearchClick(searchInput.value)" class="btn btn-outline-dark" type="button">Search</button>
+        </form>
+        <a (click)="redirectToForm()" *ngIf="!isSign"  class="btn btn-warning ms-5">Sign In</a>
+        <a (click)="signOut()" *ngIf="isSign" class="btn btn-warning ms-5">Sign Out</a>
+        <a (click)="redirectToCart()" *ngIf="isSign" class="btn btn-dark ms-5">
+          Cart:{{cartData?.[0]?.items.length}}</a>        
+        <!-- <a (click)="redirectToCart()" class="btn btn-dark ms-5">Cart:{{cartData?.[0]?.items.length}}</a> -->
+      </div>
+    </nav>
+   </div>
+</header>
+
+
 <!-- <header>
   <div class="container">
     <nav class="navbar navbar-light bg-light justify-content-end mt-5 mb-5">
@@ -15,26 +34,8 @@
    </div>
 </header> -->
 
-<header>
-  <div class="container">
-    <nav class="navbar navbar-light bg-light justify-content-end mt-5 mb-5">
-      <div class="d-flex">
-        <form class="d-flex justify-content-end">
-          <input class="form-control me-2" type="search" placeholder="Search" aria-label="Search" #searchInput>
-          <button (click)="handleSearchClick(searchInput.value)" class="btn btn-outline-dark" type="button">Search</button>
-        </form>
-        <a routerLink="registration" class="btn btn-warning ms-5">Sign in</a>
-        <a routerLink="cart" class="btn btn-dark ms-5">Cart:{{cartData?.[0]?.items.length}}</a>
-        <!-- <a routerLink="cart" class="btn btn-dark ms-5">Cart:{{cartData[0]?.items.length}}</a> -->
-        <!-- <h4>{{cartData[0]?.items.length}}</h4> -->
-
-      </div>
-    </nav>
-   </div>
-</header>
-
-
-
+<!-- <a routerLink="cart" class="btn btn-dark ms-5">Cart:{{cartData[0]?.items.length}}</a> -->
+<!-- <h4>{{cartData[0]?.items.length}}</h4> -->
 
 
 

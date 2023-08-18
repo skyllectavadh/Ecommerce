@@ -16,8 +16,7 @@
           <img class="img-fluid" [src]="'http://localhost:5000/uploads/' + item?.productId?.image" />
         </div>
         <div class="card-body">
-          <h5 class="card-title">Product Name: {{ item?.productId?.name }}</h5>
-         
+          <h5 class="card-title">Product Name: {{ item?.productId?.name }}</h5>         
           <p class="card-text">Price: {{ item.productId.price }}</p>
           <p>Colour: {{ item?.productId?.colour }}</p>
 
@@ -36,9 +35,9 @@
             <p>Stock: {{ item?.productId?.stock }}</p>
             <div class="d-flex">
               <button class="btn btn-danger" (click)="removeItemFromCart(item?.id)">Delete</button>
-              <div *ngIf="isUpdate" class="mx-5">
+              <!-- <div *ngIf="isUpdate" class="mx-5">
                 <button class="btn btn-success">Buy Now</button>
-              </div>
+              </div> -->
             </div>
           </ng-container>
         </div>
