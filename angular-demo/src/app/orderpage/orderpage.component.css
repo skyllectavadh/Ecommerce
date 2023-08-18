@@ -1,0 +1,19 @@
+/* Add this style in your component's CSS file or your global CSS */
+ul {
+    list-style-type: none; /* Remove the bullet points */
+    margin: 0; /* Remove the default margin */
+    padding: 0; /* Remove the default padding */
+  }
+
+  /* Add this style in your component's CSS file or your global CSS */
+td {
+    padding: 40px; 
+  }
+
+  /* Add this style in your component's CSS file or your global CSS */
+td {
+    /* padding: 5px; */
+    border-right: 1px solid #ddd; /* Add a vertical border to the right of each cell */
+  }
+  
+  

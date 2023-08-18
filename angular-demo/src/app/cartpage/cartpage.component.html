@@ -49,7 +49,6 @@
 <button class="btn btn-dark mx-4" (click)="goBack()">Back</button>
 
 
-
 <!-- Modal -->
 <div class="modal fade" id="staticBackdrop" data-bs-backdrop="static" data-bs-keyboard="false" tabindex="-1" aria-labelledby="staticBackdropLabel" aria-hidden="true">
   <div class="modal-dialog">
@@ -63,7 +62,9 @@
       </h5>
       <div class="modal-footer">
         <button type="button" class="btn btn-danger" data-bs-dismiss="modal">Deny</button>
-        <button type="button" class="btn btn-success" data-bs-dismiss="modal" (click)="confirmOrder(cartData[0]._id)">Confirm</button>
+        <button type="button" class="btn btn-success" data-bs-dismiss="modal" (click)="confirmOrder()">Confirm</button>
+
+        <!-- <button type="button" class="btn btn-success" data-bs-dismiss="modal" (click)="confirmOrder(cartData[0]._id)">Confirm</button> -->
       </div>
     </div>
   </div>

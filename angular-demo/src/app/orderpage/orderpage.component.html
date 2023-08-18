@@ -1,18 +1,21 @@
-<table>
+<!-- <table>
   <thead>
-    <tr>
-        <th>No.</th>
+    <tr class="border border-4">
+      <th>No.</th>
       <th>User Email</th>
-      <th>Product Names</th>
-      <th>Product Stock</th>
-      <th>Product Price</th>
-      <th>Product Quantity</th>
+      <th>Product Name</th>
+      <th>Stock</th>
+      <th>Price</th>
+      <th>Quantity</th>
       <th>Status</th>
     </tr>
   </thead>
   <tbody>
-    <tr *ngFor="let order of orderData?.orders; let i = index">
-        <td>{{ i + 1 }}.</td>
+    <tr
+      class="border border-4"
+      *ngFor="let order of orderData?.orders; let i = index"
+    >
+      <td>{{ i + 1 }}.</td>
       <td>{{ order?.userId?.email }}</td>
       <td>
         <ul>
@@ -30,11 +33,12 @@
       </td>
       <td>
         <ul>
-          <li *ngFor="let item of order?.cartId?.items">
-            {{ item?.productId?.price }}
+          <li *ngFor="let item of order?.items">
+            {{ item?.price | currency : "INR" }}
           </li>
         </ul>
       </td>
+
       <td>
         <ul>
           <li *ngFor="let item of order?.cartId?.items">
@@ -51,4 +55,77 @@
       </td>
     </tr>
   </tbody>
+</table> -->
+<table>
+  <thead>
+    <tr class="border border-4">
+      <th>No.</th>
+      <th>User Name</th>
+      <th>Product Name</th>
+      <th>Stock</th>
+      <th>Price</th>
+      <th>Quantity</th>
+      <th>Status</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr *ngFor="let order of orderData?.orders; let i = index">
+      <td class="border border-4">{{ i + 1 }}.</td>
+      <td class="border border-4">{{ order?.userId?.name }}</td>
+      <td class="border border-4">
+        <ul>
+          <li class="border border-3" *ngFor="let item of order?.items">
+            {{ item?.productId?.name }}
+          </li>
+        </ul>
+      </td>
+      <td class="border border-4">
+        <ul>
+          <li class="border border-3" *ngFor="let item of order?.items">
+            {{ item?.productId?.stock }}
+          </li>
+        </ul>
+      </td>
+      <td class="border border-4">
+        <ul>
+          <li class="border border-3" *ngFor="let item of order?.items">
+            {{ item?.price | currency : "INR" }}
+          </li>
+        </ul>
+      </td>
+      <td class="border border-4">
+        <ul>
+          <li class="border border-3" *ngFor="let item of order?.items">
+            {{ item?.quantity }}
+          </li>
+        </ul>
+      </td>
+      <!-- ... Other table cells ... -->
+<td class="border border-4">
+  <ul>
+    <li class="border border-3" *ngFor="let item of order?.items">
+      <select [(ngModel)]="item.status" (ngModelChange)="updateItemStatus(order._id, item._id)">
+        <option value="pending">pending</option>
+        <option value="confirm">confirm</option>
+      </select>
+    </li>
+  </ul>
+</td>
+<!-- ... Other table cells ... -->
+
+      <!-- <td class="border border-4">
+        <ul>
+          <li class="border border-3" *ngFor="let item of order?.items">
+            <select [(ngModel)]="item.status">
+              <option value="pending">pending</option>
+              <option value="successfull">confirm</option>
+            </select>
+          </li>
+        </ul>
+      </td> -->
+    </tr>
+  </tbody>
 </table>
+
+
+

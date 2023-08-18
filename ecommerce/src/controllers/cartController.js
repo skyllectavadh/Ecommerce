@@ -215,6 +215,79 @@ function getTotalQuantityOfProduct(existingCart, productId) {
 //     .send("Error creating carts: " + error.message);
 //   }
 // };
+// exports.createCartProduct = async (req, res) => {
+//   try {
+//     const { error } = validateCart(req.body);
+//     if (error) {
+//       return res.status(400).send(error);
+//     }
+
+//     const { userId, items } = req.body;
+
+//     let existingCart = await Cart.findOne({ userId });
+
+//     for (const newItem of items) {
+//       const product = await Product.findById(newItem.productId); // Assuming you have a Product model
+
+//       if (!product) {
+//         return res.status(400).json({
+//           success: false,
+//           message: `Product with ID ${newItem.productId} not found`,
+//         });
+//       }
+
+//       const totalQuantityInCart = existingCart
+//         ? getTotalQuantityOfProduct(existingCart, newItem.productId)
+//         : 0;
+
+//       const totalRequestedQuantity = totalQuantityInCart + newItem.quantity;
+
+//       if (totalRequestedQuantity > product.stock) {
+//         return res.status(400).json({
+//           success: false,
+//           message: `Total quantity of ${product.name} is more than available stock`,
+//         });
+//       }
+//     }
+
+//     if (existingCart) {
+//       // If cart exists, check if the productId already exists in the cart items
+//       for (const newItem of items) {
+//         const existingItemIndex = existingCart.items.findIndex(
+//           (item) => item.productId.toString() === newItem.productId
+//         );
+    
+//         if (existingItemIndex !== -1) {
+//           // If productId already exists, increment the quantity and update the status
+//           existingCart.items[existingItemIndex].quantity += newItem.quantity;
+//           existingCart.items[existingItemIndex].status = 'pending'; // Add or update status here
+//         } else {
+//           // If the productId doesn't exist, add the new item to the existing cart's items array
+//           existingCart.items.push({ ...newItem, status: 'pending' });
+//         }
+//       }
+    
+//       await existingCart.save();
+//     } else {
+//       // If cart doesn't exist, create a new cart
+//       const cartData = {
+//         userId,
+//         items: items.map(item => ({ ...item, status: 'pending' })),
+//       };
+    
+//       const cart = new Cart(cartData);
+    
+//       await cart.save();
+//     }
+//     res.status(200).json({
+//       success: true,
+//       message: "Cart products added successfully",
+//     });
+//   } catch (error) {
+//     console.error("Error creating carts:", error);
+//     res.status(500).send("Error creating carts: " + error.message);
+//   }
+// };
 exports.createCartProduct = async (req, res) => {
   try {
     const { error } = validateCart(req.body);
@@ -258,12 +331,11 @@ exports.createCartProduct = async (req, res) => {
         );
     
         if (existingItemIndex !== -1) {
-          // If productId already exists, increment the quantity and update the status
+          // If productId already exists, increment the quantity
           existingCart.items[existingItemIndex].quantity += newItem.quantity;
-          existingCart.items[existingItemIndex].status = 'pending'; // Add or update status here
         } else {
           // If the productId doesn't exist, add the new item to the existing cart's items array
-          existingCart.items.push({ ...newItem, status: 'pending' });
+          existingCart.items.push({ ...newItem });
         }
       }
     
@@ -272,7 +344,7 @@ exports.createCartProduct = async (req, res) => {
       // If cart doesn't exist, create a new cart
       const cartData = {
         userId,
-        items: items.map(item => ({ ...item, status: 'pending' })),
+        items: items.map(item => ({ ...item })),
       };
     
       const cart = new Cart(cartData);
@@ -288,6 +360,7 @@ exports.createCartProduct = async (req, res) => {
     res.status(500).send("Error creating carts: " + error.message);
   }
 };
+
 
 exports.removeItemFromCart = async (req, res) => {
   try {

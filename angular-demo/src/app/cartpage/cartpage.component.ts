@@ -12,6 +12,7 @@ import { io, Socket } from 'socket.io-client';
 export class CartpageComponent  {
   private socket: Socket;
   userId: string = '';
+  cartId:string = '';
   cartData: any;
   totalPrice:any;
   quantities: number[] = [1, 2, 3, 4, 5,6,7,8,9,10];
@@ -37,9 +38,10 @@ export class CartpageComponent  {
       (data: any) => {
         // this.cartData = data.map((item: any) => ({ ...item, editQuantity: false }));
         this.cartData = data;
-
-        // console.log('Cart Data:', this.cartData);
-        // console.log('cartitem',this.cartData[0]?.items.length);
+        this.cartId =this.cartData[0]?._id
+        
+        console.log('Cart Datas:', this.cartData);
+        console.log('cartitem',this.cartId);
       },
       (error) => {
         console.error('Error fetching cart data:', error);
@@ -137,11 +139,28 @@ export class CartpageComponent  {
     window.history.back();
   }
 
-  confirmOrder(cartId: string) {
-    this.cartService.createProductOrder(this.userId, cartId).subscribe(
+
+  confirmOrder() {
+    this.getCartDataByUserId(); // Fetch the cart data
+  
+    const orderItems = this.cartData[0]?.items.map((item: any) => {
+      return {
+        productId: item.productId._id, // Assuming productId is under item.productId._id
+        quantity: item.quantity,
+        price: item.price,
+      };
+    });
+  
+    const orderData = {
+      cartId: this.cartId,
+      userId: this.userId,
+      items: orderItems,
+    };
+  
+    this.cartService.createProductOrder(orderData).subscribe(
       (response: any) => {
         console.log('Order created:', response);
-        this.getCartDataByUserId()
+        this.getCartDataByUserId(); // Fetch the updated cart data
         // Optionally, you can reset the cart data or perform any other actions
         // after successfully creating the order.
       },
@@ -150,6 +169,45 @@ export class CartpageComponent  {
       }
     );
   }
+  
+  // confirmOrder() {
+  //   this.getCartDataByUserId(); // Fetch the cart data
+  //   const orderData = {
+  //     cartId: this.cartId,
+  //     userId: this.userId,
+  //     items: this.cartData[0]?.items, // Use the dynamically generated items array
+  //   };
+
+    
+  
+  //   this.cartService.createProductOrder(orderData).subscribe(
+  //     (response: any) => {
+  //       console.log('Order created:', response);
+  //       this.getCartDataByUserId(); // Fetch the updated cart data
+  //       // Optionally, you can reset the cart data or perform any other actions
+  //       // after successfully creating the order.
+  //     },
+  //     (error) => {
+  //       console.error('Error creating order:', error);
+  //     }
+  //   );
+  // }
+  
+  
+
+  // confirmOrder(cartId: string) {
+  //   this.cartService.createProductOrder(this.userId, cartId).subscribe(
+  //     (response: any) => {
+  //       console.log('Order created:', response);
+  //       this.getCartDataByUserId()
+  //       // Optionally, you can reset the cart data or perform any other actions
+  //       // after successfully creating the order.
+  //     },
+  //     (error) => {
+  //       console.error('Error creating order:', error);
+  //     }
+  //   );
+  // }
   
   
   

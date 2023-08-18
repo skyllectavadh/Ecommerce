@@ -11,12 +11,15 @@ export class CartService {
 
   constructor(private http: HttpClient) { }
 
-  // getCartData(userId: string) {
-  //   const url = `${this.apiUrl}/${userId}`;
-  //   return this.http.get(url);
-  // }
-  createProductOrder(userId: string, cartId: string) {
-    return this.http.post(`${this.api}createProductOrder`, { userId, cartId });
+  
+  createProductOrder(orderData: any) {
+    return this.http.post(`${this.api}createProductOrder`, orderData);
+  }
+  
+  
+  updateOrderItemStatus(orderId: string, itemId: string, status: string) {
+    const url = `${this.api}updateOrderItemStatus/${orderId}/${itemId}`;
+    return this.http.put(url, { status });
   }
 
   getOrder(){
