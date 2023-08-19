@@ -1,31 +1,37 @@
 <!-- <p>adminpage works!</p> -->
 <div class="d-flex justify-content-end mx-2 my-3">
-<button class="btn btn-dark" (click)="redirectToOrder()">Orders</button>
+  <button class="btn btn-dark" (click)="redirectToOrder()">Orders</button>
 </div>
 <div class="d-flex justify-content-center my-5">
-<table>
-  <thead>
-    <tr>
-      <th>Name</th>
-      <th>Email</th>
-      <th>Status</th>
-      <th>Action</th>
-      <th>Action</th>
-      <!-- Add more columns as needed -->
-    </tr>
-  </thead>
-  <tbody>
-    <tr *ngFor="let user of registeredUsers">
-      <td>{{ user.name }}</td>
-      <td>{{ user.email }}</td>
-      <td>{{ user.status }}</td>
-      <td><button class="btn btn-danger" (click)="deleteUser(user)">Delete</button></td>
-      <td>
-        <button class="btn btn-secondary" (click)="redirectToEdit(user)">Edit</button>
-      </td>
-    </tr>
-  </tbody>
-</table>
+  <table>
+    <thead>
+      <tr>
+        <th>Name</th>
+        <th>Email</th>
+        <th>Status</th>
+        <th>Action</th>
+        <th>Action</th>
+        <!-- Add more columns as needed -->
+      </tr>
+    </thead>
+    <tbody>
+      <tr *ngFor="let user of registeredUsers">
+        <td>{{ user.name }}</td>
+        <td>{{ user.email }}</td>
+        <td>{{ user.status }}</td>
+        <td>
+          <button class="btn btn-danger" (click)="deleteUser(user)">
+            Delete
+          </button>
+        </td>
+        <td>
+          <button class="btn btn-secondary" (click)="redirectToEdit(user)">
+            Edit
+          </button>
+        </td>
+      </tr>
+    </tbody>
+  </table>
 </div>
 
 <!-- -->

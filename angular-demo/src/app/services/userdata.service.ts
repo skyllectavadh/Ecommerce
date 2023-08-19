@@ -1,38 +1,46 @@
-import { Injectable } from '@angular/core';
-import { HttpClient } from '@angular/common/http';
-
+import { Injectable } from "@angular/core";
+import { HttpClient } from "@angular/common/http";
+import { environment } from "../../environments/enviroment.local";
 
 @Injectable({
-  providedIn: 'root'
+  providedIn: "root",
 })
-export class UserdataService {
+export class UserdataService {    
+  private apiUrl = `${environment.url}`;
 
-  // constructor() {}
+  geturl = `${this.apiUrl}users?role=user`;
+  constructor(private http: HttpClient) {}
 
-      geturl = 'http://localhost:5000/users?role=user';
-      constructor(private http: HttpClient) {}
-      users() {
-        return this.http.get(this.geturl);
-      }
+  getUserById(userId: string) {
+    const url = `${this.apiUrl}users/${userId}`;
+    return this.http.get(url);
+  }
+  
 
-      posturl = 'http://localhost:5000/createUser';
-      saveUsers(data: any) {
-        // console.log("d",data);
-        return this.http.post(this.posturl,data);
-      }
+  patchUser(userId: string, updatedData: any) {
+    const url = `${this.apiUrl}users/${userId}`;
+    return this.http.patch(url, updatedData);
+  }
 
-      getLoginurl = 'http://localhost:5000/login';
-      loginusers() {
-        return this.http.get(this.getLoginurl);
-      }
+  users() {
+    return this.http.get(this.geturl);
+  }
 
-      postLoginurl ='http://localhost:5000/login';
-      saveLogin(data:any){
-        return this.http.post(this.postLoginurl,data);
-}
-}
+  posturl = `${this.apiUrl}createUser`;
+  saveUsers(data: any) {
+    // console.log("d",data);
+    return this.http.post(this.posturl, data);
+  }
 
-//
-// getRegisteredUsers() {
-//   return this.http.get('http://localhost:5000/users?role=user');
-// }
+  getLoginurl = `${this.apiUrl}login`;
+  loginusers() {
+    return this.http.get(this.getLoginurl);
+  }
+
+  postLoginurl = `${this.apiUrl}login`;
+  saveLogin(data: any) {
+    return this.http.post(this.postLoginurl, data);
+  }
+} 
+
+

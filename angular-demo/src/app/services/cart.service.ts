@@ -1,13 +1,18 @@
 import { Injectable } from '@angular/core';
 import { HttpClient, HttpHeaders } from '@angular/common/http';
+import { environment } from "../../environments/enviroment.local";
 
 @Injectable({
   providedIn: 'root'
 })
 export class CartService {
 
-  private apiUrl = 'http://localhost:5000/cart';
-  private api = 'http://localhost:5000/';
+  // private apiUrl = 'http://localhost:5000/cart';
+  // private api = 'http://localhost:5000/';
+
+
+  private apiUrl = `${environment.url}cart`;
+  private api = environment.url;
 
   constructor(private http: HttpClient) { }
 
@@ -76,6 +81,7 @@ export class CartService {
 
   
 }
+
 
 
   // deleteCartItem(userId:string,itemId:string){

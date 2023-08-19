@@ -2,8 +2,11 @@ import { Component, EventEmitter, Output } from "@angular/core";
 import { ProductService } from "../services/product.service";
 import { SearchService } from "../services/search.service"; // Import the SearchService here
 import { CartService } from "../services/cart.service";
+import { UserdataService } from "../services/userdata.service";
+
 import jwtDecode from "jwt-decode";
 import { Router } from "@angular/router";
+import { data } from "jquery";
 
 @Component({
   selector: "app-header",
@@ -17,12 +20,25 @@ export class HeaderComponent {
   cartData: any;
   userId: string = "";
   isSign: any;
+  loginUserData:any;
   constructor(
     private productService: ProductService,
     private searchService: SearchService,
     private cartService: CartService,
-    private router: Router
+    private router: Router,
+    private userdataService:UserdataService
   ) {}
+
+  userName(){
+    this.userdataService.getUserById(this.userId).subscribe(
+      (data:any)=>{
+        this.loginUserData=data;
+        // console.log("logda",this.loginUserData);
+        // console.log("logda",this.loginUserData.data.name);
+
+        
+      })
+  }
 
   handleSearchClick(searchValue: string) {
     // Check if the searchValue has more than three characters
@@ -35,13 +51,14 @@ export class HeaderComponent {
     this.userId = this.getUserIdFromToken(); // Get userId from the token in localStorage
     this.getCartDataByUserId();
     this.isTokenAvailable();
+    this.userName()
   }
 
   getCartDataByUserId() {
     this.cartService.getCartData(this.userId).subscribe(
       (data: any) => {
         this.cartData = data;
-        // console.log('Cart Data:header', this.cartData);
+        console.log('Cart Data:header', this.cartData);
         // console.log('cartitem',this.cartData.items);
       },
       (error) => {

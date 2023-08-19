@@ -17,7 +17,7 @@
       />
       <div
         *ngIf="name.invalid && (name.dirty || name.touched)"
-        class="error-message"
+        class="error-message text-bg-danger"
       >
         Field is required
       </div>
@@ -37,7 +37,9 @@
         *ngIf="email.invalid && (email.dirty || email.touched)"
         class="error-message"
       >
-        <div *ngIf="email.errors?.['required']">Field is required</div>
+        <div *ngIf="email.errors?.['required']" class="text-bg-danger">
+          Field is required
+        </div>
         <div *ngIf="email.errors?.['email']">Invalid email format</div>
       </div>
       <br />
@@ -58,14 +60,16 @@
         *ngIf="mobile.invalid && (mobile.dirty || mobile.touched)"
         class="error-message"
       >
-        <div *ngIf="mobile.errors?.['required']">Field is required</div>
-        <div *ngIf="mobile.errors?.['minlength']">
+        <div *ngIf="mobile.errors?.['required']" class="text-bg-danger">
+          Field is required
+        </div>
+        <div *ngIf="mobile.errors?.['minlength']" class="text-bg-danger">
           Mobile must have at least 10 digits
         </div>
-        <div *ngIf="mobile.errors?.['maxlength']">
+        <div *ngIf="mobile.errors?.['maxlength']" class="text-bg-danger">
           Mobile cannot have more than 10 digits
         </div>
-        <div *ngIf="mobile.errors?.['pattern']"></div>
+        <div *ngIf="mobile.errors?.['pattern']" class="text-bg-danger"></div>
       </div>
       <br />
 
@@ -81,7 +85,7 @@
       />
       <div
         *ngIf="password.invalid && (password.dirty || password.touched)"
-        class="error-message"
+        class="error-message text-bg-danger"
       >
         <!-- Validation error messages -->
       </div>
@@ -99,21 +103,18 @@
       <div
         *ngIf="
           confirmPassword.invalid &&
-          (confirmPassword.dirty || confirmPassword.touched)
-        "
-        class="error-message"
+          (confirmPassword.dirty || confirmPassword.touched)"
+        class="error-message text-bg-danger"
       >
-        <!-- Validation error messages -->
       </div>
       <br />
 
       <div
         *ngIf="password.value !== confirmPassword.value && usersForm.dirty"
-        class="error-message"
-      >
-        Passwords do not match
+        class="error-message text-bg-danger">
+        Password & Confirm password do not match
       </div>
-      <br />
+      <br/>
 
       <button
         class="btn btn-primary"

@@ -77,11 +77,13 @@ exports.getUserById= async (req, res) => {
     try {
       const _id = req.params.id;
       const getUserById = await RegisterUser.findById({ _id });
-      res.json({
+      res.status(200).json({
         success: true,
         message:"RegisterUsers fetch successfully",
         data: getUserById,        
       });
+
+    
       // send(getUserById);
     } catch (error) {
       res.status(400).json({
