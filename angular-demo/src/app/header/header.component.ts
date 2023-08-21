@@ -58,7 +58,7 @@ export class HeaderComponent {
     this.cartService.getCartData(this.userId).subscribe(
       (data: any) => {
         this.cartData = data;
-        console.log('Cart Data:header', this.cartData);
+        console.log('Cart Data:headers', this.cartData.order[0].items.length);
         // console.log('cartitem',this.cartData.items);
       },
       (error) => {

@@ -404,7 +404,13 @@ exports.getcart = async (req, res) => {
   try {
     // Retrieve all cart  records
     const carts = await Cart.find();
-    res.send(carts);
+    res.status(200).json({
+      success: true,
+      carts: carts,
+      message:"Cart fetch successfully",
+      
+    });
+    // res.send(carts);
   } catch (error) {
     console.error("Error cart :", error);
     res.status(500).send("Internal server error");
@@ -428,7 +434,13 @@ exports.getCartByUserId = async (req, res) => {
       },
     ]);
 
-    res.send(getCartById);
+    // res.send(getCartById);
+    res.status(200).json({
+      success: true,
+      order: getCartById,
+      message:"Order fetch successfully",
+      
+    });
     socket.getCartsByUserId("getCart", getCartById);
   } catch (error) {
     console.log(error);
@@ -570,7 +582,13 @@ exports.getTotalPriceByUserId = async (req, res) => {
       return res.status(404).send("No cart found for the given user.");
     }
 
-    res.send({ totalPrice: totalPriceResult[0].totalPrice });
+    // res.send({ totalPrice: totalPriceResult[0].totalPrice });
+    res.status(200).json({
+      success: true,
+      price: { totalPrice: totalPriceResult[0].totalPrice },
+      message:"total fetch successfully",
+      
+    });
   } catch (error) {
     console.error("Error calculating total price:", error);
     res.status(500).send("Error calculating total price: " + error.message);
