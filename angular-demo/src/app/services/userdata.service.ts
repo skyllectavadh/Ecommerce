@@ -8,7 +8,9 @@ import { environment } from "../../environments/enviroment.local";
 export class UserdataService {    
   private apiUrl = `${environment.url}`;
 
-  geturl = `${this.apiUrl}users?role=user`;
+  // geturl = `${this.apiUrl}users?role=user`;
+  geturl = `${this.apiUrl}users`;
+
   constructor(private http: HttpClient) {}
 
   getUserById(userId: string) {

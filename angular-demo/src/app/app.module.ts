@@ -21,6 +21,7 @@ import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { SearchComponent } from './search/search.component';
 import { SearchService } from './services/search.service';
 import { OrderpageComponent } from './orderpage/orderpage.component';
+import { PopularproductComponent } from './popularproduct/popularproduct.component';
 
 // import { SearchResultsComponent } from './search-results/search-results.component';
 
@@ -40,7 +41,8 @@ import { OrderpageComponent } from './orderpage/orderpage.component';
     HeaderComponent,
     BuypageComponent,
     SearchComponent,
-    OrderpageComponent
+    OrderpageComponent,
+    PopularproductComponent
     // SearchResultsComponent,
     // SearchPipePipe,
 

@@ -59,9 +59,6 @@
     </li>
   </ul>
 </div> -->
-
-
-
 <!-- <div class="col" *ngIf="isSearch" style="margin-left: 1633px;">
   <div ngbDropdown class="d-inline-block">
     <button type="button" class="btn btn-dark" id="dropdownBasic1" ngbDropdownToggle>
@@ -74,7 +71,7 @@
   </div>
 </div> -->
 <app-header (searchValue)="handleSearch($event)"></app-header>
-<div *ngIf="isSearch" >
+<div *ngIf="isSearch">
   <div class="col " style="margin-left: 1633px;">
     <div ngbDropdown class="d-inline-block">
       <button type="button" class="btn btn-dark" id="dropdownBasic1" ngbDropdownToggle>
@@ -93,8 +90,7 @@
   <div class="row" *ngIf="products.length > 0; ">
     <div class="col-md-2 m-lg-4" *ngFor="let product of products">
       <a (click)="redirectToProductdetail(product)" style="text-decoration: none;">
-        <div class="card mb-3">
-
+        <div class="card mb-3 rounded">
           <div class="post-image">
             <img class="img-fluid" [src]="'http://localhost:5000/uploads/' + product.image" >
           </div>
@@ -138,8 +134,6 @@
     </li>
   </ul>
 </div>
-
-
 
 
 <!-- <pagination-controls (pageChange)="onPageChange($event)" [maxSize]="totalPages"></pagination-controls>

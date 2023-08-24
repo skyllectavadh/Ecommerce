@@ -2,6 +2,49 @@ const { Order, validateOrder } = require("../models/orderModel");
 const { Cart } = require("../models/cartModel");
 const { Product } = require("../models/productModel");
 
+exports.get = async(req,res)=>{
+  try {
+    const popularProduct = await Order.aggregate([
+      { $unwind: '$items' },
+      {
+        $group: {
+          _id: '$items.productId',
+          totalOrders: { $sum: 1 },
+        },
+      },
+      { $sort: { totalOrders: -1 } },
+      { $limit: 2 },
+      {
+        $lookup: {
+          from: 'products', // Replace with the name of your products collection
+          localField: '_id',
+          foreignField: '_id',
+          as: 'product',
+        },
+      },
+      { $unwind: '$product' },
+     
+    ]);
+console.log("pp",popularProduct);
+    if (!popularProduct || popularProduct.length === 0) {
+      return res.status(404).json({ message: 'No popular product found' });
+    }
+
+    res.status(200).json({
+      success: true,
+      message: 'Most popular product retrieved successfully',
+      popularProduct: popularProduct,
+    });
+  } catch (error) {
+    res.status(500).json({
+      success: false,
+      message: 'An error occurred',
+      error: error.message,
+    });
+  }
+};
+
+
 exports.createProductOrder = async (req, res) => {
   try {
     const orderData = req.body;

@@ -17,24 +17,24 @@
   </div>
   <button type="submit" class="btn btn-primary">Edit</button>
 </form> -->
-<form (ngSubmit)="onSubmit()">
+<form (ngSubmit)="onSubmit()" class="w-25">
   <div class="form-group">
     <label for="name">Name</label>
-    <input type="text" class="form-control" id="name" placeholder="Enter name" [(ngModel)]="name" name="name">
+    <input type="text" class="form-control" id="name" placeholder="Enter name" [(ngModel)]="name" name="name" value={{userDataById?.data?.name}}>
   </div>
   <div class="form-group">
     <label for="email">Email</label>
-    <input type="email" class="form-control" id="email" placeholder="Enter email" [(ngModel)]="email" name="email">
+    <input type="email" class="form-control" id="email" placeholder="Enter email" [(ngModel)]="email" name="email" value={{userDataById?.data?.email}}>
   </div>
   <div class="form-group">
     <label for="status">Status</label>
-    <select class="form-control" id="status" [(ngModel)]="status" name="status">
+    <select class="form-control" id="status" [(ngModel)]="status" name="status" value={{userDataById?.data?.status}}>
       <option value="active">Active</option>
       <option value="inactive">Inactive</option>
       <option value="delete">Delete</option>
     </select>
   </div>
-  <button type="submit" class="btn btn-primary">Update</button>
+  <button type="submit" class="btn btn-success d-flex">Update</button>
 </form>
 
 

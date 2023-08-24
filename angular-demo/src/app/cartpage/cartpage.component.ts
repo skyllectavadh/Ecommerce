@@ -88,32 +88,7 @@ export class CartpageComponent  {
   }
 
 
-//  onQuantityChange(item: any) {
-//   console.log("qcheck",item.quantity);
-//   if (item.quantity === 5) {
-//     console.log("ifonQchange");
 
-//     item.editQuantity = true;
-//   } else {
-//     console.log("elseonQchange");
-//     item.editQuantity = true;
-//     this.updateCartItem(item);
-//   }
-// }
-
-// updateCartItem(item: any) {
-//   // console.log('item');
-
-//   this.cartService.updateCartItem(this.userId, item.id, item.quantity).subscribe(
-//     (response: any) => {
-//       console.log('Cart item updated:', response);
-//       item.editQuantity = false;
-//     },
-//     (error) => {
-//       console.error('Error updating cart item:', error);
-//     }
-//   );
-// }
 
 
   updateCartItem(item: any) {
@@ -168,9 +143,36 @@ export class CartpageComponent  {
         console.error('Error creating order:', error);
       }
     );
-  }
-  
-  // confirmOrder() {
+  } 
+}
+//  onQuantityChange(item: any) {
+//   console.log("qcheck",item.quantity);
+//   if (item.quantity === 5) {
+//     console.log("ifonQchange");
+
+//     item.editQuantity = true;
+//   } else {
+//     console.log("elseonQchange");
+//     item.editQuantity = true;
+//     this.updateCartItem(item);
+//   }
+// }
+
+// updateCartItem(item: any) {
+//   // console.log('item');
+
+//   this.cartService.updateCartItem(this.userId, item.id, item.quantity).subscribe(
+//     (response: any) => {
+//       console.log('Cart item updated:', response);
+//       item.editQuantity = false;
+//     },
+//     (error) => {
+//       console.error('Error updating cart item:', error);
+//     }
+//   );
+// }
+
+// confirmOrder() {
   //   this.getCartDataByUserId(); // Fetch the cart data
   //   const orderData = {
   //     cartId: this.cartId,
@@ -209,12 +211,6 @@ export class CartpageComponent  {
   //   );
   // }
   
-  
-  
-}
-
-
-
 
   // updateCartItem(item: any) {//or 1
   //   this.cartService.updateCartItem(this.userId, item.id, item.quantity).subscribe(

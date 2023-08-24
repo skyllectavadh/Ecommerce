@@ -45,8 +45,28 @@
           </li>
         </ul>
       </td>
-
       <td class="border border-4">
+        <ul>
+          <li class="border border-3" *ngFor="let item of order?.items">
+            <select
+              [(ngModel)]="item.status"
+              (ngModelChange)="updateItemStatus(order._id, item._id)"
+              [disabled]="item.status === 'confirm'"
+            >
+              <option value="pending">pending</option>
+              <option value="confirm">confirm</option>
+            </select>
+            <button
+              class="btn btn-danger ms-3"
+              (click)="cancelItem(order._id, item._id)"
+              [disabled]="item.status === 'confirm'"
+            >
+              Cancel
+            </button>
+          </li>
+        </ul>
+      </td>
+      <!-- <td class="border border-4">
         <ul>
           <li class="border border-3" *ngFor="let item of order?.items">
             <select
@@ -56,11 +76,10 @@
               <option value="pending">pending</option>
               <option value="confirm">confirm</option>
             </select>
-            <button class="btn btn-danger ms-3" (click)="cancelItem(order._id, item._id)">Cancel</button>
-            <!-- <button class="btn btn-danger ms-3" (click)="cancelItem()">Cancel</button> -->
+            <button class="btn btn-danger ms-3" (click)="cancelItem(order._id, item._id)">Cancel</button>          
           </li>
         </ul>
-      </td>
+      </td> -->
     </tr>
   </tbody>
 </table>

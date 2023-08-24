@@ -36,7 +36,6 @@ export class DashboardComponent implements OnInit {
     this.searchTerm =  value
     // You can perform any further actions with the search value as needed.
   }
-
   
 
   ngOnInit(): void {

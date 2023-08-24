@@ -10,6 +10,7 @@
         <a (click)="redirectToCart()" *ngIf="isSign" class="btn btn-dark ms-5">
           Cart:{{cartData?.[0]?.items?.length}}</a>        
           <a (click)="signOut()" *ngIf="isSign" class="btn btn-warning ms-5">Sign Out</a>
+          <button class="btn btn-success" style="margin-left:100px;" (click)="redirectToPopularProduct()">Popular products</button>
           <p *ngIf="isSign" class="bg-dark text-light rounded ms-5 text-capitalize px-3 py-0">Hello, {{loginUserData?.data?.name}} 🖐️</p>
           <!-- <div >
           </div> -->

@@ -1,3 +1,59 @@
+<!-- 2 -->
+<div *ngIf="!isCart">
+  <div class="card mb-3" style="max-width: 700px; margin-left: 700px">
+    <div class="row g-0">
+      <div class="col-md-4">
+        <img class="img-fluid" [src]="'http://localhost:5000/uploads/' + productdetail.image">
+      </div>
+      <div class="col-md-8">
+        <div class="card-body">
+          <h5 class="card-title">Name:{{ productdetail?.name }}</h5>
+          <p class="card-text">Description:{{ productdetail?.description }}</p>
+          <p class="card-text">Brand: {{ productdetail?.brand }}</p>
+          <p class="card-text">Price: {{ productdetail?.price }}</p>
+          <p class="card-text">Category: {{ productdetail?.category }}</p>
+          <p class="card-text">Guarantee: {{ productdetail?.guarantee }}</p>
+
+          <!-- Display Stock if in stock, else show Out of Stock message -->
+          <ng-container *ngIf="productdetail?.stock > 0; else outOfStock">
+            <p class="card-text">Stock: {{ productdetail?.stock }}</p>
+            <div class="col">
+              <div ngbDropdown class="d-inline-block" placement="bottom-right">
+                <button type="button" class="btn btn-dark" id="dropdownBasic1" ngbDropdownToggle>
+                  Quantity: {{ selectedQuantity }}
+                </button>
+                <div ngbDropdownMenu aria-labelledby="dropdownBasic1">
+                  <button ngbDropdownItem (click)="selectedQuantity = 1">1</button>
+                  <button ngbDropdownItem (click)="selectedQuantity = 2">2</button>
+                  <button ngbDropdownItem (click)="selectedQuantity = 3">3</button>
+                </div>
+              </div>
+            </div>
+            <a class="btn btn-warning my-2" (click)="addToCart()">Add to Cart</a>
+            <a class="btn btn-dark mx-4">Buy Now</a>
+          </ng-container>
+
+          <!-- Display Out of Stock message -->
+          <ng-template #outOfStock>
+            <p class="card-text text-danger">Out of Stock</p>
+          </ng-template>
+
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- <button ngbDropdownItem (click)="selectedQuantity = 4">4</button>
+<button ngbDropdownItem (click)="selectedQuantity = 5">5</button> -->
+<!-- <button class="btn btn-dark mx-4" [routerLink]="['buypage']">Buy Now</button> -->
+<!-- <app-cartpage *ngIzf="isCart" [cartdetail]="cartDetail" [selectedQuantity]="selectedQuantity"></app-cartpage> -->
+          <!-- <a [routerLink]="['/cart']" class="btn btn-warning">Add to Cart</a> -->
+          <!-- <a [routerLink]="['/cart']" [state]="{ product: product }" class="btn btn-warning">Add to Cart</a> -->
+          <!-- <p class="card-text"><small class="text-muted">Last updated 3 mins ago</small></p> -->
+ <!-- <a (click)="sendToCart(productdetail)" class="btn btn-warning my-2"
+            >Add to Cart</a
+          > -->
 <!-- <app-header></app-header> -->
 <!-- <p>productdetail works!</p> -->
 <!-- <div class="card mb-3"  style="max-width: 540px; margin-left: 700px;">
@@ -66,62 +122,3 @@
     </div>
   </div>
 </div> -->
-<!-- 2 -->
-<div *ngIf="!isCart">
-  <div class="card mb-3" style="max-width: 700px; margin-left: 700px">
-    <div class="row g-0">
-      <div class="col-md-4">
-        <img class="img-fluid" [src]="'http://localhost:5000/uploads/' + productdetail.image">
-      </div>
-
-      <div class="col-md-8">
-        <div class="card-body">
-          <h5 class="card-title">Name:{{ productdetail?.name }}</h5>
-          <p class="card-text">Description:{{ productdetail?.description }}</p>
-          <p class="card-text">Brand: {{ productdetail?.brand }}</p>
-          <p class="card-text">Price: {{ productdetail?.price }}</p>
-          <p class="card-text">Category: {{ productdetail?.category }}</p>
-          <p class="card-text">Guarantee: {{ productdetail?.guarantee }}</p>
-
-          <!-- Display Stock if in stock, else show Out of Stock message -->
-          <ng-container *ngIf="productdetail?.stock > 0; else outOfStock">
-            <p class="card-text">Stock: {{ productdetail?.stock }}</p>
-            <div class="col">
-              <div ngbDropdown class="d-inline-block" placement="bottom-right">
-                <button type="button" class="btn btn-dark" id="dropdownBasic1" ngbDropdownToggle>
-                  Quantity: {{ selectedQuantity }}
-                </button>
-                <div ngbDropdownMenu aria-labelledby="dropdownBasic1">
-                  <button ngbDropdownItem (click)="selectedQuantity = 1">1</button>
-                  <button ngbDropdownItem (click)="selectedQuantity = 2">2</button>
-                  <button ngbDropdownItem (click)="selectedQuantity = 3">3</button>
-                </div>
-              </div>
-            </div>
-            <a class="btn btn-warning my-2" (click)="addToCart()">Add to Cart</a>
-            <a class="btn btn-dark mx-4">Buy Now</a>
-          </ng-container>
-
-          <!-- Display Out of Stock message -->
-          <ng-template #outOfStock>
-            <p class="card-text text-danger">Out of Stock</p>
-          </ng-template>
-
-        </div>
-      </div>
-    </div>
-  </div>
-</div>
-
-<!-- <button ngbDropdownItem (click)="selectedQuantity = 4">4</button>
-<button ngbDropdownItem (click)="selectedQuantity = 5">5</button> -->
-<!-- <button class="btn btn-dark mx-4" [routerLink]="['buypage']">Buy Now</button> -->
-<!-- <app-cartpage *ngIf="isCart" [cartdetail]="cartDetail" [selectedQuantity]="selectedQuantity"></app-cartpage> -->
-
-
-          <!-- <a [routerLink]="['/cart']" class="btn btn-warning">Add to Cart</a> -->
-          <!-- <a [routerLink]="['/cart']" [state]="{ product: product }" class="btn btn-warning">Add to Cart</a> -->
-          <!-- <p class="card-text"><small class="text-muted">Last updated 3 mins ago</small></p> -->
- <!-- <a (click)="sendToCart(productdetail)" class="btn btn-warning my-2"
-            >Add to Cart</a
-          > -->

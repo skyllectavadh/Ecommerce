@@ -35,8 +35,8 @@ export class AdminpageComponent {
     }
   }
 
-  redirectToEdit(user: any) {
-    this.router.navigate(['/edit', user._id], { state: { user } });
+  redirectToEdit(data: any) {
+    this.router.navigate(['/edit', data], { state: { data } });
   }
 
   redirectToOrder(){

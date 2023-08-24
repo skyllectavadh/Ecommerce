@@ -6,7 +6,6 @@ import { UserdataService } from "../services/userdata.service";
 
 import jwtDecode from "jwt-decode";
 import { Router } from "@angular/router";
-import { data } from "jquery";
 
 @Component({
   selector: "app-header",
@@ -21,22 +20,33 @@ export class HeaderComponent {
   userId: string = "";
   isSign: any;
   loginUserData:any;
+  popularProduct:any;
   constructor(
     private productService: ProductService,
     private searchService: SearchService,
     private cartService: CartService,
     private router: Router,
     private userdataService:UserdataService
-  ) {}
+    ) {}
+    
+    ngOnInit(): void {
+      this.userId = this.getUserIdFromToken(); // Get userId from the token in localStorage
+      this.getCartDataByUserId();
+      this.isTokenAvailable();
+      this.userName()
+      // this.getPopularProduct()
+    }
+    
+    redirectToPopularProduct(){      
+          this.router.navigate(["/popularproduct"]);
+    }
 
   userName(){
     this.userdataService.getUserById(this.userId).subscribe(
       (data:any)=>{
         this.loginUserData=data;
         // console.log("logda",this.loginUserData);
-        // console.log("logda",this.loginUserData.data.name);
-
-        
+        // console.log("logda",this.loginUserData.data.name);        
       })
   }
 
@@ -47,12 +57,6 @@ export class HeaderComponent {
     }
   }
 
-  ngOnInit(): void {
-    this.userId = this.getUserIdFromToken(); // Get userId from the token in localStorage
-    this.getCartDataByUserId();
-    this.isTokenAvailable();
-    this.userName()
-  }
 
   getCartDataByUserId() {
     this.cartService.getCartData(this.userId).subscribe(
@@ -107,7 +111,7 @@ export class HeaderComponent {
   isTokenAvailable() {
     const token = localStorage.getItem("token");
     if (token) {
-      this.isSign = true;
+      this.isSign = true; 
     } else {
       this.isSign = false;
     }
@@ -124,6 +128,8 @@ export class HeaderComponent {
     // this.isSign = false
     // console.log("sign",this.isSign);
   }
+
+ 
 }
 
 // import { Component } from '@angular/core';
