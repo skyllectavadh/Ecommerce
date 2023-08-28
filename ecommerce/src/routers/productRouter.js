@@ -10,6 +10,7 @@ router.get("/products",productController.getProducts)
 router.get("/product/:name",productController.getProductByName)
 router.delete("/product/:id",productController.deleteProduct)
 router.patch("/updateProduct/:productId",productController.updateProduct)
+
 module.exports = router;
 
 

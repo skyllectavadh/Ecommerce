@@ -22,6 +22,7 @@ import { SearchComponent } from './search/search.component';
 import { SearchService } from './services/search.service';
 import { OrderpageComponent } from './orderpage/orderpage.component';
 import { PopularproductComponent } from './popularproduct/popularproduct.component';
+import { WishlistComponent } from './wishlist/wishlist.component';
 
 // import { SearchResultsComponent } from './search-results/search-results.component';
 
@@ -42,7 +43,8 @@ import { PopularproductComponent } from './popularproduct/popularproduct.compone
     BuypageComponent,
     SearchComponent,
     OrderpageComponent,
-    PopularproductComponent
+    PopularproductComponent,
+    WishlistComponent
     // SearchResultsComponent,
     // SearchPipePipe,
 

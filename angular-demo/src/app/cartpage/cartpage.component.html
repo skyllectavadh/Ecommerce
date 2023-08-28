@@ -5,8 +5,7 @@
   <h4 class="text-start mx-4 text-decoration-underline">Shopping Cart</h4>
   <p class="d-flex justify-content-end my-0 mx-2">Subtotal ({{ cartData && cartData[0]?.items?.length }} items): &#x20b9;<span><h5>{{ totalPrice?.totalPrice }}</h5></span></p>
   <div class="d-flex justify-content-end">
-    <button type="button" class="btn btn-warning mx-2" data-bs-toggle="modal" data-bs-target="#staticBackdrop">
-      Proceed to Buy
+    <button type="button" class="btn btn-warning mx-2" data-bs-toggle="modal" data-bs-target="#staticBackdrop">Proceed to Buy
     </button>
   </div>
   <div class="row" *ngIf="cartData[0]?.items?.length > 0">

@@ -8,7 +8,9 @@ import { Router } from "@angular/router";
   styleUrls: ["./popularproduct.component.css"],
 })
 export class PopularproductComponent {
-  popularProducts: any;
+  popularProducts: any[] = [];
+  productDetail: any;
+  isProduct: boolean = false;
 
   constructor(private productService: ProductService, private router: Router) {}
 
@@ -18,12 +20,22 @@ export class PopularproductComponent {
 
   getPopularProduct() {
     this.productService.getPopularProduct().subscribe((data: any) => {
-      this.popularProducts = data;
+      this.popularProducts = data.popularProducts; // Extract the array from the response
       console.log("pop", this.popularProducts);
     });
   }
 
   back() {
     this.router.navigate(["/"]);
+  }
+
+  redirectToProductdetail(product: any) {
+    this.productDetail = product;
+    console.log("heloo", this.productDetail);
+    this.isProduct = true;
+  }
+
+  goToPopularProduct() {
+    this.isProduct = false;
   }
 }

@@ -7,6 +7,8 @@
       </div>
       <div class="col-md-8">
         <div class="card-body">
+          <!-- <h5 class="card-title">Name:{{ productdetail?._id }}</h5> -->
+
           <h5 class="card-title">Name:{{ productdetail?.name }}</h5>
           <p class="card-text">Description:{{ productdetail?.description }}</p>
           <p class="card-text">Brand: {{ productdetail?.brand }}</p>
@@ -31,6 +33,7 @@
             </div>
             <a class="btn btn-warning my-2" (click)="addToCart()">Add to Cart</a>
             <a class="btn btn-dark mx-4">Buy Now</a>
+            <a class="btn btn-dark" (click)="addToWishlist()">Add to Wish List</a>
           </ng-container>
 
           <!-- Display Out of Stock message -->

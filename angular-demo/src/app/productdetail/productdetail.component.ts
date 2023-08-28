@@ -1,12 +1,13 @@
-import { Component, OnInit, Input } from '@angular/core';
-import { Router } from '@angular/router';
-import { CartService } from '../services/cart.service';
-import jwt_decode from 'jwt-decode';
+import { Component, OnInit, Input } from "@angular/core";
+import { Router } from "@angular/router";
+import { CartService } from "../services/cart.service";
+import jwt_decode from "jwt-decode";
+import { WishlistService } from "../services/wishlist.service";
 
 @Component({
-  selector: 'app-productdetail',
-  templateUrl: './productdetail.component.html',
-  styleUrls: ['./productdetail.component.css'],
+  selector: "app-productdetail",
+  templateUrl: "./productdetail.component.html",
+  styleUrls: ["./productdetail.component.css"],
 })
 export class ProductdetailComponent implements OnInit {
   @Input() productdetail: any = {};
@@ -15,24 +16,67 @@ export class ProductdetailComponent implements OnInit {
 
   cartDetail: any[] = [];
   isCart: boolean = false;
-  constructor(private router: Router, private cartService: CartService) {}
+  constructor(
+    private router: Router,
+    private cartService: CartService,
+    private wishlistService: WishlistService
+  ) {}
 
   ngOnInit() {
-    console.log('productdetail', this.productdetail);
+    console.log("productdetail", this.productdetail);
   }
+
+  addToWishlist() {
+    const productId = this.productdetail.id;
+
+    const token = localStorage.getItem("token");
+    if (token !== null) {
+      const decodedToken: any = jwt_decode(token);
+      const userId = decodedToken.userId;
+
+      // const productData = {
+      //   productId: productId,
+      //   userId: userId,
+      // };
+      const productData = {
+        items: [
+          {
+            productId: productId,
+          },
+        ],
+        userId: userId,
+      };
+
+      this.wishlistService.addProductToWishlist(productData).subscribe(
+        (response) => {
+          console.log("Product added to wishlist:", response);
+        },
+        (error) => {
+          console.error("Error adding product to wishlist:", error);
+        }
+      );
+    } else {
+      console.error("Token not found in localStorage.");
+    }
+  }
+
   addToCart() {
     const productId = this.productdetail.id;
     const quantity = this.selectedQuantity;
     const price = this.productdetail.price;
 
     // Get the token from the localStorage
-    const token = localStorage.getItem('token');
+    const token = localStorage.getItem("token");
     if (token !== null) {
       // Decode the token to obtain the userId
       const decodedToken: any = jwt_decode(token);
 
       // Get the userId from the decoded token
       const userId = decodedToken.userId;
+      // console.log("pID",productId);
+      // console.log("pri",price);
+      // console.log("qua",quantity);
+      // console.log("uId",userId);
 
       // Prepare the product data to send to the server
       const productData = {
@@ -45,76 +89,72 @@ export class ProductdetailComponent implements OnInit {
         ],
         userId: userId,
       };
-      
+
       this.cartService.saveProduct(productData).subscribe(
-
         (response: any) => {
-
           try {
             let jsonResponse: any;
 
-            if (typeof response === 'string') {
+            if (typeof response === "string") {
               jsonResponse = JSON.parse(response);
             } else {
               jsonResponse = response;
             }
 
-            console.log('Product added to cart successfully:', jsonResponse);
-            this.router.navigate(['/cart']);
-
+            console.log("Product added to cart successfully:", jsonResponse);
+            this.router.navigate(["/cart"]);
           } catch (error) {
-            console.log("err",error);
+            console.log("err", error);
           }
         },
         (error) => {
-          console.error('Error while adding product to cart:', error);
+          console.error("Error while adding product to cart:", error);
           // this.router.navigate(['/cart']);
         }
       );
     } else {
-      console.error('Token not found in localStorage.');
+      console.error("Token not found in localStorage.");
     }
   }
 }
-  // addToCart() {
-  //   const productId = this.productdetail.id;
-  //   const quantity = this.selectedQuantity;
-  //   const price = this.productdetail.price;
+// addToCart() {
+//   const productId = this.productdetail.id;
+//   const quantity = this.selectedQuantity;
+//   const price = this.productdetail.price;
 
-  //   // Get the token from the localStorage
-  //   const token = localStorage.getItem('token');
+//   // Get the token from the localStorage
+//   const token = localStorage.getItem('token');
 
-  //   if (token !== null) {
-  //     const decodedToken: any = jwt_decode(token); //token is key where the token is stored in local sto
+//   if (token !== null) {
+//     const decodedToken: any = jwt_decode(token); //token is key where the token is stored in local sto
 
-  //     const userId = decodedToken.userId;
+//     const userId = decodedToken.userId;
 
-  //     const productData = {
-  //       items: [
-  //         {
-  //           productId: productId,
-  //           quantity: quantity,
-  //           price: price,
-  //         },
-  //       ],
-  //       userId: userId,
-  //     };
+//     const productData = {
+//       items: [
+//         {
+//           productId: productId,
+//           quantity: quantity,
+//           price: price,
+//         },
+//       ],
+//       userId: userId,
+//     };
 
-  //     this.cartService.saveProduct(productData).subscribe(
-  //       (response) => {
-  //         // Handle the response from the server if needed.
-  //         console.log('Product added to cart successfully:', response);
-  //       },
-  //       (error) => {
-  //         // Handle errors if any.
-  //         console.error('Errors while adding product to cart:', error);
-  //       }
-  //     );
-  //   } else {
-  //     console.error('Token not found in localStorage.');
-  //   }
-  // }
-
+//     this.cartService.saveProduct(productData).subscribe(
+//       (response) => {
+//         // Handle the response from the server if needed.
+//         console.log('Product added to cart successfully:', response);
+//       },
+//       (error) => {
+//         // Handle errors if any.
+//         console.error('Errors while adding product to cart:', error);
+//       }
+//     );
+//   } else {
+//     console.error('Token not found in localStorage.');
+//   }
+// }
 
 // import { Component, OnInit } from '@angular/core';
 // import { ActivatedRoute } from '@angular/router';

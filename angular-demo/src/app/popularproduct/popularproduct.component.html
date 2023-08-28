@@ -1,21 +1,26 @@
-   <app-header></app-header>
-   <div>
-    <div class="row">
-      <div class="col-md-2 m-lg-4" *ngFor="let product of popularProducts?.popularProduct">
-          <div class="card mb-3 rounded">
-            <div class="post-image">
-              <img class="img-fluid" [src]="'http://localhost:5000/uploads/' + product?.product?.image" >
-            </div>
-            <div class="card-body">
-              <h5 class="card-title">Name: {{ product?.product?.name }}</h5>
-              <p class="card-text">Description: {{ product.product.description }}</p>
-              <p class="card-text">Price: {{ product.product.price }}</p> 
-              <p class="card-text">Stock: {{ product.product.stock }}</p>
-              <p class="card-text text-danger" *ngIf="product.stock === 0">Out of Stock</p>
-              <p class="card-text" *ngIf="product.stock > 0">Stock: {{ product.product.stock }}</p>
-            </div>
+<app-header></app-header>
+<div *ngIf="!isProduct">
+  <div class="row">
+    <div class="col-md-2 m-lg-4" *ngFor="let product of popularProducts">
+      <a (click)="redirectToProductdetail(product)" style="text-decoration: none">
+        <div class="card mb-3 rounded">
+          <div class="post-image">
+            <img class="img-fluid" [src]="'http://localhost:5000/uploads/' + product.image" />
           </div>
-        <!-- </a> -->
-      </div>
+          <div class="card-body">
+            <h5 class="card-title">Name: {{ product.name }}</h5>
+            <p class="card-text">Description: {{ product.description }}</p>
+            <p class="card-text">Price: {{ product.price }}</p>
+            <!-- <p class="card-text">Stock: {{ product.stock }}</p> -->
+            <p class="card-text text-danger" *ngIf="product.stock === 0">Out of Stock</p>
+            <p class="card-text" *ngIf="product.stock > 0">Stock: {{ product.stock }}</p>
+          </div>
+        </div>
+      </a>
     </div>
-     <button class="btn btn-dark ms-5"  (click)="back()">Go to home</button>
+  </div>
+  <button class="btn btn-dark ms-5" (click)="back()">Go to home</button>
+</div>
+
+<app-productdetail *ngIf="isProduct" [productdetail]="productDetail"></app-productdetail>
+<button class="btn btn-dark ms-5" *ngIf="isProduct" (click)="goToPopularProduct()">Back</button>

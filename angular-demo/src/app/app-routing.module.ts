@@ -12,6 +12,7 @@ import { BuypageComponent } from './buypage/buypage.component';
 import { SearchComponent } from './search/search.component';
 import { OrderpageComponent } from './orderpage/orderpage.component';
 import { PopularproductComponent } from './popularproduct/popularproduct.component';
+import { WishlistComponent } from './wishlist/wishlist.component';
 // import { SearchResultsComponent } from './search-results/search-results.component';
 
 const routes: Routes = [
@@ -59,6 +60,10 @@ const routes: Routes = [
    {
     path: 'popularproduct',
     component: PopularproductComponent,
+   },
+   {
+    path: 'wishlist',
+    component: WishlistComponent,
    },
  
 

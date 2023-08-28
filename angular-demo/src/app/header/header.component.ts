@@ -3,6 +3,9 @@ import { ProductService } from "../services/product.service";
 import { SearchService } from "../services/search.service"; // Import the SearchService here
 import { CartService } from "../services/cart.service";
 import { UserdataService } from "../services/userdata.service";
+import { WishlistService } from "../services/wishlist.service";
+import jwt_decode from "jwt-decode";
+
 
 import jwtDecode from "jwt-decode";
 import { Router } from "@angular/router";
@@ -26,7 +29,8 @@ export class HeaderComponent {
     private searchService: SearchService,
     private cartService: CartService,
     private router: Router,
-    private userdataService:UserdataService
+    private userdataService:UserdataService,
+    private wishlistService: WishlistService
     ) {}
     
     ngOnInit(): void {
@@ -36,6 +40,12 @@ export class HeaderComponent {
       this.userName()
       // this.getPopularProduct()
     }
+
+    redirectToWishlist(){
+          this.router.navigate(["/wishlist"]);   
+    }
+
+    
     
     redirectToPopularProduct(){      
           this.router.navigate(["/popularproduct"]);

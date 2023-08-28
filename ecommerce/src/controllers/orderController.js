@@ -2,9 +2,50 @@ const { Order, validateOrder } = require("../models/orderModel");
 const { Cart } = require("../models/cartModel");
 const { Product } = require("../models/productModel");
 
-exports.get = async(req,res)=>{
+// exports.get = async(req,res)=>{
+//   try {
+//     const popularProduct = await Order.aggregate([
+//       { $unwind: '$items' },
+//       {
+//         $group: {
+//           _id: '$items.productId',
+//           totalOrders: { $sum: 1 },
+//         },
+//       },
+//       { $sort: { totalOrders: -1 } },
+//       { $limit: 2 },
+//       {
+//         $lookup: {
+//           from: 'products', // Replace with the name of your products collection
+//           localField: '_id',
+//           foreignField: '_id',
+//           as: 'product',
+//         },
+//       },
+//       { $unwind: '$product' },
+     
+//     ]);
+// // console.log("pp",popularProduct);
+//     if (!popularProduct || popularProduct.length === 0) {
+//       return res.status(404).json({ message: 'No popular product found' });
+//     }
+
+//     res.status(200).json({
+//       success: true,
+//       message: 'Most popular product retrieved successfully',
+//       popularProduct: popularProduct,
+//     });
+//   } catch (error) {
+//     res.status(500).json({
+//       success: false,
+//       message: 'An error occurred',
+//       error: error.message,
+//     });
+//   }
+// };
+exports.get = async (req, res) => {
   try {
-    const popularProduct = await Order.aggregate([
+    const popularProductsData = await Order.aggregate([
       { $unwind: '$items' },
       {
         $group: {
@@ -19,21 +60,36 @@ exports.get = async(req,res)=>{
           from: 'products', // Replace with the name of your products collection
           localField: '_id',
           foreignField: '_id',
-          as: 'product',
+          as: 'productData',
         },
       },
-      { $unwind: '$product' },
-     
+      { $unwind: '$productData' },
     ]);
-console.log("pp",popularProduct);
-    if (!popularProduct || popularProduct.length === 0) {
+
+    if (!popularProductsData || popularProductsData.length === 0) {
       return res.status(404).json({ message: 'No popular product found' });
     }
 
+    // Update isPopular field in products collection
+    const productIdsToUpdate = popularProductsData.map(item => item.productData._id);
+    await Product.updateMany(
+      { _id: { $in: productIdsToUpdate } },
+      { $set: { isPopular: 1 } }
+    );
+
+    // Construct the modified response with all fields of the popular products
+    const popularProducts = popularProductsData.map(item => {
+      return {
+        id: item._id,
+        totalOrders: item.totalOrders,
+        ...item.productData, // Include all fields from the product object
+      };
+    });
+
     res.status(200).json({
       success: true,
-      message: 'Most popular product retrieved successfully',
-      popularProduct: popularProduct,
+      message: 'Most popular products retrieved successfully',
+      popularProducts: popularProducts,
     });
   } catch (error) {
     res.status(500).json({
@@ -43,7 +99,6 @@ console.log("pp",popularProduct);
     });
   }
 };
-
 
 exports.createProductOrder = async (req, res) => {
   try {

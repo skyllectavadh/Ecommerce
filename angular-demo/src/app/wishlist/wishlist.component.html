@@ -1,0 +1,35 @@
+<app-header></app-header>
+<!-- <div *ngIf="wishlistProduct"> -->
+  <!-- <h2>Wishlist Products</h2> -->
+  <!-- <div *ngFor="let item of wishlistProduct.items"> -->
+    <!-- <div class="product"> -->
+      <!-- <img class="img-fluid" [src]="'http://localhost:5000/uploads/' + item.image" /> -->
+      <!-- <img class="img-fluid" [src]="'http://localhost:5000/uploads/' + item.productId.image" > -->
+      <!-- <h3>Name:{{ item.productId.name }}</h3>
+      <p>Category: {{ item.productId.category }}</p>
+      <p>Price: {{ item.productId.price }}</p> -->
+      <!-- Add other properties you want to display -->
+    <!-- </div>
+  </div>
+</div> -->
+
+<!-- <div *ngIf="!isProduct"> -->
+  <div class="row">
+    <div class="col-md-2 m-lg-4" *ngFor="let item of wishlistProduct?.items">
+      <!-- <a (click)="redirectToCart(item)" style="text-decoration: none;"> -->
+        <div class="card mb-3 rounded">
+          <div class="post-image">
+            <img class="img-fluid" [src]="'http://localhost:5000/uploads/' + item?.productId?.image" >
+          </div>
+          <div class="card-body">
+            <h5 class="card-title">Name:{{ item?.productId?.name }}</h5>
+       
+            <p class="card-text">Price: {{ item?.productId?.price }}</p>            
+            <button class="btn btn-dark" (click)="redirectToCart(item)">Add To Cart</button>
+          </div>
+        </div>
+      <!-- </a> -->
+    </div>
+  </div>
+  <!-- <button class="btn btn-dark ms-5" *ngIf="isSearch" (click)="home()">Go to home</button> -->
+  

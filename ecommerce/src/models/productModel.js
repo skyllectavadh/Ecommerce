@@ -41,6 +41,10 @@ const productSchema = new mongoose.Schema({
   stock:{
     type:Number,
     required:true,
+  },
+  isPopular:{
+    type:Number,
+    default:0,
   }
  
 }, {

@@ -1,16 +1,17 @@
 <header>
-  <div class="container">
-    <nav class="navbar navbar-light bg-light justify-content-end mt-5 mb-5">
+  <div>
+    <nav class="navbar navbar-light bg-light justify-content-end mt-5 mb-5 bg-dark">
       <div class="d-flex">
         <form class="d-flex justify-content-end">
           <input class="form-control me-2" type="search" placeholder="Search" aria-label="Search" #searchInput>
-          <button (click)="handleSearchClick(searchInput.value)" class="btn btn-outline-dark" type="button">Search</button>
+          <button (click)="handleSearchClick(searchInput.value)" class="btn btn-dark btn-outline-light" type="button">Search</button>
         </form>
         <a (click)="redirectToForm()" *ngIf="!isSign"  class="btn btn-warning ms-5">Sign In</a>
-        <a (click)="redirectToCart()" *ngIf="isSign" class="btn btn-dark ms-5">
+        <a (click)="signOut()" *ngIf="isSign" class="btn btn-warning ms-5 btn-outline-danger">Sign Out</a>
+        <button class="btn btn-success btn-outline-light" style="margin-left:100px;" (click)="redirectToPopularProduct()">Popular products</button>
+        <button class="btn btn-dark ms-5 btn-outline-light" (click)="redirectToWishlist()">Wishlist</button>
+        <a (click)="redirectToCart()" *ngIf="isSign" class="btn btn-dark ms-5 btn-outline-light">
           Cart:{{cartData?.[0]?.items?.length}}</a>        
-          <a (click)="signOut()" *ngIf="isSign" class="btn btn-warning ms-5">Sign Out</a>
-          <button class="btn btn-success" style="margin-left:100px;" (click)="redirectToPopularProduct()">Popular products</button>
           <p *ngIf="isSign" class="bg-dark text-light rounded ms-5 text-capitalize px-3 py-0">Hello, {{loginUserData?.data?.name}} 🖐️</p>
           <!-- <div >
           </div> -->
